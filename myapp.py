@@ -14,11 +14,12 @@ time_zones = ['Asia/Dubai', 'Asia/Seoul', 'America/Chicago']
 #selected_time_zone = st.selectbox("Select Time Zone:", time_zones)
 
 # Create a container for the clock
-clock_container = st.empty()
+
 
 col1, col2, col3 = st.columns(3)
 with col1:
     selected_time_zone = st.selectbox("Select Time Zone:", time_zones)
+    clock_container = st.empty()
 with col2:
     clock_container2 = st.write("dd")
 with col3:
