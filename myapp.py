@@ -3,7 +3,7 @@ import time
 import datetime
 from datetime import datetime
 import pytz  # Import pytz for time zone support
-
+st.set_page_config(page_title="Etonboard")
 st.title("Live Clock")
 
 # Create a list of time zones with their labels
