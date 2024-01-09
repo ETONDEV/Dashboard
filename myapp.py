@@ -22,7 +22,6 @@ with col1:
     selected_time_zone = st.selectbox("Select Time Zone:", time_zones)
     clock_container = st.empty()
 with col2:
-    st.write("Korea")
     korea_time_zone = st.selectbox("korea:", close_open)
     stock1_container = st.empty()
 with col3:
