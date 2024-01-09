@@ -14,8 +14,15 @@ time_zones = ['Asia/Dubai', 'Asia/Seoul', 'America/Chicago']
 selected_time_zone = st.selectbox("Select Time Zone:", time_zones)
 
 # Create a container for the clock
-clock_container = st.empty()
+#clock_container = st.empty()
 
+col1, col2, col3 = st.columns(3)
+with col1:
+    clock_container = st.empty()
+with col2:
+    clock_container2 = st.write("dd")
+with col3:
+    clock_container3 = st.write("dd")
 def update_clock():
     # Get the current time in UTC
     current_time_utc = datetime.now(pytz.utc)
