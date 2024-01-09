@@ -15,7 +15,7 @@ st.title("Live Clock")
 
 # Create a list of time zones with their labels
 time_zones = ['Asia/Dubai', 'Asia/Seoul', 'America/Chicago']
-]
+
 
 # Create a selectbox for time zone selection
 selected_time_zone = st.selectbox("Select Time Zone:", time_zones)
