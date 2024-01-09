@@ -72,7 +72,7 @@ with col3:
     
 def update_clock():
     # Get the current time in UTC
-    current_time_utc = datetime.now(pytz.utc)
+    current_time_utc = datetime.datetime.now(pytz.utc)
 
     # Convert the time to the selected time zone
     current_time_localized = current_time_utc.astimezone(pytz.timezone(selected_time_zone))
