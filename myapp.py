@@ -27,7 +27,17 @@ def market_status(current_utc, market_tz, market_open, market_close):
 
 #======================def END=========================
 
+#======================var START=========================
 
+# Define market timezones and hours
+korean_tz = pytz.timezone("Asia/Seoul")
+us_tz = pytz.timezone("America/New_York")
+korean_market_open = datetime.time(9, 0, 0)  # 9:00 AM KST
+korean_market_close = datetime.time(15, 30, 0)  # 3:30 PM KST
+us_market_open = datetime.time(9, 30, 0)  # 9:30 AM ET
+us_market_close = datetime.time(16, 0, 0)  # 4:00 PM ET
+
+#======================var END=========================
 
 st.set_page_config(page_title="Etonboard")
 st.title("Live Clock")
