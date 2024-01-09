@@ -8,6 +8,7 @@ st.title("Live Clock")
 
 # Create a list of time zones with their labels
 time_zones = ['Asia/Dubai', 'Asia/Seoul', 'America/Chicago']
+close_open = ['Closed', 'Opened']
 
 
 # Create a selectbox for time zone selection
@@ -22,10 +23,11 @@ with col1:
     clock_container = st.empty()
 with col2:
     st.write("Korea")
+    korea_time_zone = st.selectbox("korea:", close_open)
     stock1_container = st.empty()
 with col3:
-    st.write("America")
-    stock1_container = st.empty()
+    korea_time_zone = st.selectbox("America:", close_open)
+    stock2_container = st.empty()
 def update_clock():
     # Get the current time in UTC
     current_time_utc = datetime.now(pytz.utc)
