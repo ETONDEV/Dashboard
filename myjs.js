@@ -1,12 +1,11 @@
-// Function to update the clock every second
 function updateClock() {
-  const clockElement = document.getElementById("clock");
-  const currentTime = new Date().toLocaleTimeString();
-  clockElement.textContent = currentTime;
+    const timeDisplay = document.getElementById("time-display");
+    const selectedTimezone = document.getElementById("text-input").value;
+
+    const now = new Date();
+    const options = { timeZone: selectedTimezone };
+    const formattedTime = now.toLocaleTimeString("en-US", options);
+    timeDisplay.textContent = formattedTime;
 }
 
-// Set an initial timeout to start the clock
-setTimeout(updateClock, 1000);
-
-// Set an interval to update the clock every second
-setInterval(updateClock, 1000);
+setInterval(updateClock, 1000); // Update clock every second
