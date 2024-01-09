@@ -1,52 +1,59 @@
 import streamlit as st
 import time
-import datetime
-#from yfinance import Ticker
-from datetime import datetime, timedelta
+from pytz import timezone
 
-def is_market_open(market, current_time):
-  if market == "korean":
-    return korean_market_open <= current_time <= korean_market_close
-  elif market == "us":
-    return us_market_open <= current_time <= us_market_close
-  else:
-    raise ValueError("Invalid market specified.")
+# Function to determine market status and time to open/close
+def get_market_status(market_timezone, market_open_time, market_close_time):
+    current_time = time.strftime("%H:%M", time.localtime())
+    current_time_tz = timezone(market_timezone).localize(time.strptime(current_time, "%H:%M")).astimezone(tz=None)
+    market_open_time_tz = timezone(market_timezone).localize(time.strptime(market_open_time, "%H:%M")).astimezone(tz=None)
+    market_close_time_tz = timezone(market_timezone).localize(time.strptime(market_close_time, "%H:%M")).astimezone(tz=None)
 
-# Market details
-korean_market_open = datetime(hour=9, minute=00)
-korean_market_close = datetime(hour=17, minute=30)
-us_market_open = datetime(hour=16, minute=00) - timedelta(days=1)  # Account for timezone difference
-us_market_close = datetime(hour=4, minute=00)
+    if market_open_time_tz <= current_time_tz <= market_close_time_tz:
+        status = "Open"
+        time_to_close = market_close_time_tz - current_time_tz
+    else:
+        status = "Closed"
+        if current_time_tz < market_open_time_tz:
+            time_to_open = market_open_time_tz - current_time_tz
+        else:
+            time_to_open = market_open_time_tz + timedelta(days=1) - current_time_tz
 
-st.title("Live Clock App")
+    return status, time_to_open or time_to_close
 
-# Create a container for the clock
-clock_container = st.empty()
+# Main app logic
+st.title("Market Clock App")
 
-def update_clock():
-  current_time = datetime.now()
+selected_timezone = st.text_input("Select Time Zone", "Asia/Dubai")
 
-  # Update clock display
-  clock_container.markdown(f"**Current Time:** {current_time.strftime('%H:%M:%S')}")
+st.markdown("<h2 id='clock'>Current Time:</h2>", unsafe_allow_html=True)
+st.markdown(f"<p id='time-display'>Loading...</p>", unsafe_allow_html=True)
 
-  # Check Korean market status
-  korean_open = is_market_open("korean", current_time)
-  market_status = "Open" if korean_open else "Closed"
-  time_remaining = None
-  if not korean_open:
-    time_remaining = korean_market_open - current_time
+# Define market hours (adjust as needed)
+korean_market_timezone = "Asia/Seoul"
+korean_market_open_time = "09:00"
+korean_market_close_time = "15:30"
 
-  # Check US market status
-  us_open = is_market_open("us", current_time)
-  market_status += f" (US: {market_status})"
+us_market_timezone = "America/New_York"
+us_market_open_time = "09:30"
+us_market_close_time = "16:00"
 
-  # Display market status and remaining time
-  st.markdown(f"**Korean Market:** {market_status}")
-  if time_remaining:
-    st.markdown(f"Time until Korean market opens: {time_remaining.strftime('%H:%M:%S')}")
+# Display market information
+st.markdown("<h2>Market Status</h2>")
 
-  # Additional logic for US market details (optional)
+korean_market_status, korean_market_time = get_market_status(
+    korean_market_timezone, korean_market_open_time, korean_market_close_time
+)
+st.write(
+    f"Korean Market: {korean_market_status} ({korean_market_time.strftime('%H:%M:%S')} remaining)"
+)
 
-while True:
-  update_clock()
-  time.sleep(1)
+us_market_status, us_market_time = get_market_status(
+    us_market_timezone, us_market_open_time, us_market_close_time
+)
+st.write(
+    f"US Market: {us_market_status} ({us_market_time.strftime('%H:%M:%S')} remaining)"
+)
+
+# Include JavaScript for clock updates
+st.markdown("<script src='myjs.js'></script>", unsafe_allow_html=True)
