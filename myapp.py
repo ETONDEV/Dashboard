@@ -21,9 +21,11 @@ with col1:
     selected_time_zone = st.selectbox("Select Time Zone:", time_zones)
     clock_container = st.empty()
 with col2:
-    clock_container2 = st.write("dd")
+    st.write("Korea")
+    stock1_container = st.empty()
 with col3:
-    clock_container3 = st.write("dd")
+    st.write("America")
+    stock1_container = st.empty()
 def update_clock():
     # Get the current time in UTC
     current_time_utc = datetime.now(pytz.utc)
@@ -35,7 +37,7 @@ def update_clock():
     current_time_formatted = current_time_localized.strftime("%Y-%m-%d(%a) %H:%M:%S")
 
     # Display the clock with the time zone label
-    clock_container.markdown(f"**Current Time :** {current_time_formatted}")
+    clock_container.markdown(f"**Time :** {current_time_formatted}")
 
 # Call the update_clock function every second
 while True:
