@@ -4,6 +4,13 @@ import datetime
 import pytz  # Import pytz for time zone support
 
 #======================def START=========================
+def extract_time(remaining_time):
+    # Extract hours, minutes, and seconds from the timedelta object
+    hours, remainder = divmod(remaining_time.seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    remaining_time_formatted = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+    return remaining_time_formatted
+
 def market_status(current_utc, market_tz, market_open, market_close):
     market_time = current_utc.astimezone(market_tz)
 
@@ -19,17 +26,17 @@ def market_status(current_utc, market_tz, market_open, market_close):
 
     if market_open_dt <= market_time < market_close_dt:
         remaining_time = market_close_dt - market_time
-        remaining_time_formatted = remaining_time.strftime("%H:%M:%S")
+        remaining_time_formatted = extract_time(remaining_time)
         return f"Closes in {str(remaining_time_formatted)}"
         
     elif market_time < market_open_dt:
         remaining_time = market_open_dt - market_time
-        remaining_time_formatted = remaining_time.strftime("%H:%M:%S")
+        remaining_time_formatted = extract_time(remaining_time)
         return f"Opens in {str(remaining_time_formatted)}"
     else:
         next_open_dt = (market_open_dt + datetime.timedelta(days=1)).astimezone(pytz.utc)
         remaining_time = next_open_dt - current_utc
-        remaining_time_formatted = remaining_time.strftime("%H:%M:%S")
+        remaining_time_formatted = extract_time(remaining_time)
         return f"Opens in {str(remaining_time_formatted)}"
 
 def is_weekday(dt):
