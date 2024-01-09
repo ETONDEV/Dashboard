@@ -14,10 +14,7 @@ def get_timezone_display_name(tz_name):
 st.title("Live Clock")
 
 # Create a list of time zones with their labels
-time_zones = [
-    ('Asia/Dubai', '(GMT +4)'),
-    ('Asia/Seoul', '(GMT +9)'),
-    ('America/Chicago', '(GMT -8)'),  # Add a comma here
+time_zones = ['Asia/Dubai', 'Asia/Seoul', 'America/Chicago']
 ]
 
 # Create a selectbox for time zone selection
