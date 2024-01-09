@@ -7,8 +7,13 @@ import pytz  # Import pytz for time zone support
 #======================def START=========================
 def market_status(current_utc, market_tz, market_open, market_close):
     market_time = current_utc.astimezone(market_tz)
+
     if not is_weekday(market_time):
         return "Closed - Opens on next weekday"
+
+    # Ensure that market_open and market_close are datetime.time objects
+    if not isinstance(market_open, datetime.time) or not isinstance(market_close, datetime.time):
+        raise ValueError("market_open and market_close must be datetime.time objects")
 
     market_open_dt = market_time.replace(hour=market_open.hour, minute=market_open.minute, second=0, microsecond=0)
     market_close_dt = market_time.replace(hour=market_close.hour, minute=market_close.minute, second=0, microsecond=0)
