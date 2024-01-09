@@ -21,7 +21,7 @@ def update_clock():
     current_time_utc = datetime.now(pytz.utc)
 
     # Convert the time to the selected time zone
-    current_time_localized = current_time_utc.astimezone(pytz.timezone(selected_time_zone[0]))
+    current_time_localized = current_time_utc.astimezone(pytz.timezone(selected_time_zone))
 
     # Format the time as HH:MM:SS
     current_time_formatted = current_time_localized.strftime("%H:%M:%S")
