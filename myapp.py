@@ -11,14 +11,16 @@ def get_timezone_display_name(tz_name):
     return f"{tz_name} (GMT {'+' if hours_offset >= 0 else ''}{hours_offset})"
 
 def market_status(current_time, market_open, market_close):
-    if market_open <= current_time.time() < market_close:
-        remaining_time = datetime.datetime.combine(datetime.date.today(), market_close) - current_time
+    market_open_datetime = datetime.datetime.combine(current_time.date(), market_open, tzinfo=current_time.tzinfo)
+    market_close_datetime = datetime.datetime.combine(current_time.date(), market_close, tzinfo=current_time.tzinfo)
+
+    if market_open_datetime <= current_time < market_close_datetime:
+        remaining_time = market_close_datetime - current_time
         return f"Open - Closes in {str(remaining_time)}"
     else:
-        next_open = datetime.datetime.combine(datetime.date.today(), market_open)
         if current_time.time() > market_close:
-            next_open += datetime.timedelta(days=1)
-        remaining_time = next_open - current_time
+            market_open_datetime += datetime.timedelta(days=1)
+        remaining_time = market_open_datetime - current_time
         return f"Closed - Opens in {str(remaining_time)}"
 
 def main():
