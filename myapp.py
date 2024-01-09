@@ -3,6 +3,32 @@ import time
 import datetime
 from datetime import datetime
 import pytz  # Import pytz for time zone support
+
+#======================def START=========================
+def market_status(current_utc, market_tz, market_open, market_close):
+    market_time = current_utc.astimezone(market_tz)
+    if not is_weekday(market_time):
+        return "Closed - Opens on next weekday"
+
+    market_open_dt = market_time.replace(hour=market_open.hour, minute=market_open.minute, second=0, microsecond=0)
+    market_close_dt = market_time.replace(hour=market_close.hour, minute=market_close.minute, second=0, microsecond=0)
+
+    if market_open_dt <= market_time < market_close_dt:
+        remaining_time = market_close_dt - market_time
+        return f"Open - Closes in {str(remaining_time)}"
+    elif market_time < market_open_dt:
+        remaining_time = market_open_dt - market_time
+        return f"Closed - Opens in {str(remaining_time)}"
+    else:
+        next_open_dt = (market_open_dt + datetime.timedelta(days=1)).astimezone(pytz.utc)
+        remaining_time = next_open_dt - current_utc
+        return f"Closed - Opens in {str(remaining_time)}"
+
+
+#======================def END=========================
+
+
+
 st.set_page_config(page_title="Etonboard")
 st.title("Live Clock")
 
