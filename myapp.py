@@ -4,6 +4,12 @@ import datetime
 from datetime import datetime
 import pytz  # Import pytz for time zone support
 
+def get_timezone_display_name(tz_name):
+    tz = pytz.timezone(tz_name)
+    now = datetime.datetime.now(tz)
+    offset = tz.utcoffset(now)
+    hours_offset = int(offset.total_seconds() / 3600)
+    return f"{tz_name} (GMT {'+' if hours_offset >= 0 else ''}{hours_offset})"
 
 st.title("Live Clock")
 
