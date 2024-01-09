@@ -24,7 +24,7 @@ def update_clock():
     current_time_localized = current_time_utc.astimezone(pytz.timezone(selected_time_zone))
 
     # Format the time as HH:MM:SS
-    current_time_formatted = current_time_localized.strftime("%M %D %H:%M:%S")
+    current_time_formatted = current_time_localized.strftime("%m-%d(%a) %H:%M:%S")
 
     # Display the clock with the time zone label
     clock_container.markdown(f"**Current Time :** {current_time_formatted}")
