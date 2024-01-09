@@ -24,20 +24,22 @@ def market_status(current_utc, market_tz, market_open, market_close):
     market_open_dt = market_time.replace(hour=market_open.hour, minute=market_open.minute, second=0, microsecond=0)
     market_close_dt = market_time.replace(hour=market_close.hour, minute=market_close.minute, second=0, microsecond=0)
 
+    korea_time_zone.
+    
     if market_open_dt <= market_time < market_close_dt:
         remaining_time = market_close_dt - market_time
         remaining_time_formatted = extract_time(remaining_time)
-        return f"Closes in {str(remaining_time_formatted)}"
+        return f"**Closes in** {str(remaining_time_formatted)}"
         
     elif market_time < market_open_dt:
         remaining_time = market_open_dt - market_time
         remaining_time_formatted = extract_time(remaining_time)
-        return f"Opens in {str(remaining_time_formatted)}"
+        return f"**Opens in** {str(remaining_time_formatted)}"
     else:
         next_open_dt = (market_open_dt + datetime.timedelta(days=1)).astimezone(pytz.utc)
         remaining_time = next_open_dt - current_utc
         remaining_time_formatted = extract_time(remaining_time)
-        return f"Opens in {str(remaining_time_formatted)}"
+        return f"**Opens in** {str(remaining_time_formatted)}"
 
 def is_weekday(dt):
     return dt.weekday() < 5  # Monday is 0, Sunday is 6
@@ -75,10 +77,10 @@ with col1:
     selected_time_zone = st.selectbox("Select Time Zone :", time_zones)
     clock_container = st.empty()
 with col2:
-    korea_time_zone = st.selectbox("Korea [9:00AM ~ 3:30PM (KST)] :", close_open)
+    korea_time_zone = st.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", close_open)
     stock1_container = st.empty()
 with col3:
-    korea_time_zone = st.selectbox("US [11:30PM ~ 6:00AM (KST)] :", close_open)
+    korea_time_zone = st.text_input("US [11:30PM ~ 6:00AM (KST)] :", close_open)
     stock2_container = st.empty()
     
 def update_clock():
