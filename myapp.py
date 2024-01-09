@@ -80,10 +80,12 @@ with col1:
     clock_container = st.empty()
 with col2:
     #korea_time_zone = st.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", close_open)
+    "Korea Market:"
     korea_time_zone = st.empty()
     stock1_container = st.empty()
 with col3:
     #us_time_zone = st.text_input("US [11:30PM ~ 6:00AM (KST)] :", close_open)
+    "US Market:"
     us_time_zone = st.empty()
     stock2_container = st.empty()
     
