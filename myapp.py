@@ -1,67 +1,55 @@
+# myapp.py
 import streamlit as st
-import time
 import datetime
-from datetime import datetime, timedelta  # Import datetime for tz-aware datetime
-from pytz import timezone
+import pytz
 
-now_utc = datetime.datetime.now(timezone.utc)
-now_korea = now_utc.astimezone(timezone("Asia/Seoul"))
-
-
-
-# Function to determine market status and time to open/close
-def get_market_status(market_timezone, market_open_time, market_close_time):
-    current_time = datetime.now(timezone.utc).astimezone(timezone(market_timezone))  # Get tz-aware current time
-    current_time_str = current_time.strftime("%H:%M")  # Extract time string
-
-    market_open_time_tz = timezone(market_timezone).localize(time.strptime(market_open_time, "%H:%M")).astimezone(tz=None)
-    market_close_time_tz = timezone(market_timezone).localize(time.strptime(market_close_time, "%H:%M")).astimezone(tz=None)
-
-    if market_open_time_tz <= current_time_tz <= market_close_time_tz:
-        status = "Open"
-        time_to_close = market_close_time_tz - current_time_tz
+def market_status(current_time, market_open, market_close):
+    if market_open <= current_time.time() < market_close:
+        remaining_time = datetime.datetime.combine(datetime.date.today(), market_close) - current_time
+        return f"Open - Closes in {str(remaining_time)}"
     else:
-        status = "Closed"
-        if current_time_tz < market_open_time_tz:
-            time_to_open = market_open_time_tz - current_time_tz
-        else:
-            time_to_open = market_open_time_tz + timedelta(days=1) - current_time_tz
+        next_open = datetime.datetime.combine(datetime.date.today(), market_open)
+        if current_time.time() > market_close:
+            next_open += datetime.timedelta(days=1)
+        remaining_time = next_open - current_time
+        return f"Closed - Opens in {str(remaining_time)}"
 
-    return status, time_to_open or time_to_close
+def main():
+    st.title('Real-time Clock with Market Status')
 
-# Main app logic
-st.title("Market Clock App")
+    # Default timezone
+    default_tz = 'Asia/Dubai'
+    selected_tz = st.text_input('Enter Time Zone', default_tz)
+    
+    # Try to set the timezone, revert to default if invalid
+    try:
+        current_tz = pytz.timezone(selected_tz)
+    except:
+        current_tz = pytz.timezone(default_tz)
+        st.error('Invalid Time Zone. Showing default.')
 
-selected_timezone = st.text_input("Select Time Zone", "Asia/Dubai")
+    # JavaScript to update the time every second
+    st.markdown("""
+        <script src="/static/myjs.js"></script>
+        <div id="current-time"></div>
+    """, unsafe_allow_html=True)
 
-st.markdown("<h2 id='clock'>Current Time:</h2>", unsafe_allow_html=True)
-st.markdown(f"<p id='time-display'>Loading...</p>", unsafe_allow_html=True)
+    # Display market status
+    korean_market_open = datetime.time(9, 0, 0)  # 9:00 AM
+    korean_market_close = datetime.time(15, 30, 0)  # 3:30 PM
+    us_market_open = datetime.time(9, 30, 0)  # 9:30 AM ET
+    us_market_close = datetime.time(16, 0, 0)  # 4:00 PM ET
 
-# Define market hours (adjust as needed)
-korean_market_timezone = "Asia/Seoul"
-korean_market_open_time = "09:00"
-korean_market_close_time = "15:30"
+    now = datetime.datetime.now(current_tz)
 
-us_market_timezone = "America/New_York"
-us_market_open_time = "09:30"
-us_market_close_time = "16:00"
+    col1, col2 = st.beta_columns(2)
+    with col1:
+        st.markdown("**Korean Market**")
+        st.text(market_status(now, korean_market_open, korean_market_close))
 
-# Display market information
-st.markdown("<h2>Market Status</h2>")
+    with col2:
+        st.markdown("**US Market**")
+        st.text(market_status(now, us_market_open, us_market_close))
 
-korean_market_status, korean_market_time = get_market_status(
-    korean_market_timezone, korean_market_open_time, korean_market_close_time
-)
-st.write(
-    f"Korean Market: {korean_market_status} ({korean_market_time.strftime('%H:%M:%S')} remaining)"
-)
-
-us_market_status, us_market_time = get_market_status(
-    us_market_timezone, us_market_open_time, us_market_close_time
-)
-st.write(
-    f"US Market: {us_market_status} ({us_market_time.strftime('%H:%M:%S')} remaining)"
-)
-
-# Include JavaScript for clock updates
-st.markdown("<script src='myjs.js'></script>", unsafe_allow_html=True)
+if __name__ == "__main__":
+    main()
