@@ -17,16 +17,13 @@ def market_status(current_time, market_open, market_close):
 def main():
     st.title('Real-time Clock with Market Status')
 
-    # Default timezone
-    default_tz = 'Asia/Dubai'
-    selected_tz = st.text_input('Enter Time Zone', default_tz)
-    
-    # Try to set the timezone, revert to default if invalid
-    try:
-        current_tz = pytz.timezone(selected_tz)
-    except:
-        current_tz = pytz.timezone(default_tz)
-        st.error('Invalid Time Zone. Showing default.')
+    # Get list of all time zones
+    time_zones = pytz.all_timezones
+
+    # Time zone selection
+    selected_tz = st.selectbox('Select Time Zone', time_zones, index=time_zones.index('Asia/Dubai'))
+
+    current_tz = pytz.timezone(selected_tz)
 
     # JavaScript to update the time every second
     st.markdown("""
