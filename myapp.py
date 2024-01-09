@@ -3,6 +3,13 @@ import streamlit as st
 import datetime
 import pytz
 
+def get_timezone_display_name(tz_name):
+    tz = pytz.timezone(tz_name)
+    now = datetime.datetime.now(tz)
+    offset = tz.utcoffset(now)
+    hours_offset = int(offset.total_seconds() / 3600)
+    return f"{tz_name} (GMT {'+' if hours_offset >= 0 else ''}{hours_offset})"
+
 def market_status(current_time, market_open, market_close):
     if market_open <= current_time.time() < market_close:
         remaining_time = datetime.datetime.combine(datetime.date.today(), market_close) - current_time
@@ -17,12 +24,12 @@ def market_status(current_time, market_open, market_close):
 def main():
     st.title('Real-time Clock with Market Status')
 
-    # Get list of all time zones
-    time_zones = pytz.all_timezones
+    # Get list of all time zones with GMT offsets
+    time_zones = [get_timezone_display_name(tz) for tz in pytz.all_timezones]
 
     # Time zone selection
-    selected_tz = st.selectbox('Select Time Zone', time_zones, index=time_zones.index('Asia/Dubai'))
-
+    selected_tz_display = st.selectbox('Select Time Zone', time_zones, index=time_zones.index(get_timezone_display_name('Asia/Dubai')))
+    selected_tz = selected_tz_display.split(' ')[0]  # Extract just the timezone name
     current_tz = pytz.timezone(selected_tz)
 
     # JavaScript to update the time every second
@@ -39,7 +46,7 @@ def main():
 
     now = datetime.datetime.now(current_tz)
 
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     with col1:
         st.markdown("**Korean Market**")
         st.text(market_status(now, korean_market_open, korean_market_close))
