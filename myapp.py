@@ -9,9 +9,10 @@ st.title("Live Clock")
 
 # Create a list of time zones with their labels
 time_zones = [
-    ("Asia/Dubai", "Asia/Dubai (GMT +4)"),
-    ("Europe/London", "Europe/London (GMT +0)"),
-    ("America/Los_Angeles", "America/Los_Angeles (GMT -8)"),
+    ("Asia/Dubai", "(GMT +4)"),
+    ("Europe/London", "(GMT +0)"),
+    ("Asia/Seoul", "(GMT +9)"),
+    ("America/Los_Angeles", "A(GMT -8)"),
     # Add more time zones as needed
 ]
 
