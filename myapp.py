@@ -24,6 +24,8 @@ def market_status(current_utc, market_tz, market_open, market_close):
         remaining_time = next_open_dt - current_utc
         return f"Closed - Opens in {str(remaining_time)}"
 
+def is_weekday(dt):
+    return dt.weekday() < 5  # Monday is 0, Sunday is 6
 
 #======================def END=========================
 
@@ -63,6 +65,7 @@ with col2:
 with col3:
     korea_time_zone = st.selectbox("US [11:30PM ~ 6:00AM (KST)]:", close_open)
     stock2_container = st.empty()
+    
 def update_clock():
     # Get the current time in UTC
     current_time_utc = datetime.now(pytz.utc)
@@ -75,6 +78,8 @@ def update_clock():
 
     # Display the clock with the time zone label
     clock_container.markdown(f"**Time :** {current_time_formatted}")
+    stock1_container.markdown(market_status(current_time_utc, korean_tz, korean_market_open, korean_market_close))
+    stock2_container.markdown(market_status(current_time_utc, us_tz, us_market_open, us_market_close))
 
 # Call the update_clock function every second
 while True:
