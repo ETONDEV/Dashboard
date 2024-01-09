@@ -110,7 +110,7 @@ def update_clock():
     # Display the clock with the time zone label
     clock_container.markdown(f"**Time:** {current_time_formatted}")
     stock1_container.markdown(market_status(current_time_utc, korean_tz, korean_market_open, korean_market_close, korea_time_zone))
-    stock2_container.markdown(market_status(current_time_utc, us_tz, us_market_open, us_market_close, us_time_zone, us_time_zone))
+    stock2_container.markdown(market_status(current_time_utc, us_tz, us_market_open, us_market_close, us_time_zone))
 
 # Call the update_clock function every second
 while True:
