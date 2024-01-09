@@ -1,8 +1,9 @@
 import streamlit as st
 import time
+import datetime
 import pytz  # Import pytz for time zone support
 
-st.title("Live Clock App with Time Zone Selector")
+st.title("Live Clock")
 
 # Create a list of time zones with their labels
 time_zones = [
