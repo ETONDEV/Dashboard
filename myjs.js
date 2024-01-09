@@ -1,11 +1,8 @@
-function updateClock() {
-    const timeDisplay = document.getElementById("time-display");
-    const selectedTimezone = document.getElementById("text-input").value;
-
-    const now = new Date();
-    const options = { timeZone: selectedTimezone };
-    const formattedTime = now.toLocaleTimeString("en-US", options);
-    timeDisplay.textContent = formattedTime;
+// myjs.js
+function updateTime() {
+    var now = new Date();
+    document.getElementById('current-time').innerHTML = now.toLocaleTimeString();
+    setTimeout(updateTime, 1000);
 }
 
-setInterval(updateClock, 1000); // Update clock every second
+updateTime();
