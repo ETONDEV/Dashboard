@@ -12,7 +12,7 @@ time_zones = [
     ("Asia/Dubai", "(GMT +4)"),
     ("Europe/London", "(GMT +0)"),
     ("Asia/Seoul", "(GMT +9)"),
-    ("America/Los_Angeles", "A(GMT -8)"),
+    ("America/Los_Angeles", "(GMT -8)"),
     # Add more time zones as needed
 ]
 
