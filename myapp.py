@@ -1,11 +1,13 @@
 import streamlit as st
 import time
+from datetime import datetime, timedelta  # Import datetime for tz-aware datetime
 from pytz import timezone
 
 # Function to determine market status and time to open/close
 def get_market_status(market_timezone, market_open_time, market_close_time):
-    current_time = time.strftime("%H:%M", time.localtime())
-    current_time_tz = timezone(market_timezone).localize(time.strptime(current_time, "%H:%M")).astimezone(tz=None)
+    current_time = datetime.now(timezone.utc).astimezone(timezone(market_timezone))  # Get tz-aware current time
+    current_time_str = current_time.strftime("%H:%M")  # Extract time string
+
     market_open_time_tz = timezone(market_timezone).localize(time.strptime(market_open_time, "%H:%M")).astimezone(tz=None)
     market_close_time_tz = timezone(market_timezone).localize(time.strptime(market_close_time, "%H:%M")).astimezone(tz=None)
 
