@@ -29,21 +29,21 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         remaining_time = market_close_dt - market_time
         remaining_time_formatted = extract_time(remaining_time)
         #xx_time_zone.text_input(f"Openned")
-        xx_time_zone.text_input(xx_label, "Opened", key="case1", disabled=True)
+        #xx_time_zone.text_input(xx_label, "Opened", key="case1", disabled=True)
         return f"**Closes in** {str(remaining_time_formatted)}"
         
     elif market_time < market_open_dt:
         remaining_time = market_open_dt - market_time
         remaining_time_formatted = extract_time(remaining_time)
         #xx_time_zone.markdown(f"Closed")
-        xx_time_zone.text_input(xx_label, "Closed", key="case2", disabled=True)
+        #xx_time_zone.text_input(xx_label, "Closed", key="case2", disabled=True)
         return f"**Opens in** {str(remaining_time_formatted)}"
     else:
         next_open_dt = (market_open_dt + datetime.timedelta(days=1)).astimezone(pytz.utc)
         remaining_time = next_open_dt - current_utc
         remaining_time_formatted = extract_time(remaining_time)
         #xx_time_zone.markdown(f"Closed")
-        xx_time_zone.text_input(xx_label, "Closed", key="case3", disabled=True)
+        #xx_time_zone.text_input(xx_label, "Closed", key="case3", disabled=True)
         return f"**Opens in** {str(remaining_time_formatted)}"
 
 def is_weekday(dt):
@@ -60,7 +60,8 @@ korean_market_open = datetime.time(9, 0, 0)  # 9:00 AM KST
 korean_market_close = datetime.time(15, 30, 0)  # 3:30 PM KST
 us_market_open = datetime.time(9, 30, 0)  # 9:30 AM ET
 us_market_close = datetime.time(16, 0, 0)  # 4:00 PM ET
-
+korea_market_status = "Loading"
+us_market_status = "Loading"
 #======================var END=========================
 
 st.set_page_config(page_title="Etonboard")
@@ -83,11 +84,11 @@ with col1:
     clock_container = st.empty()
 with col2:
     #korea_time_zone = st.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", close_open)
-    korea_time_zone = st.empty()
+    korea_time_zone = st.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", korea_market_status, disabled=True)
     stock1_container = st.empty()
 with col3:
     #us_time_zone = st.text_input("US [11:30PM ~ 6:00AM (KST)] :", close_open)
-    us_time_zone = st.empty()
+    us_time_zone = st.text_input("US [11:30PM ~ 6:00AM (KST)] :", us_market_status, disabled=True)
     stock2_container = st.empty()
     
 def update_clock():
