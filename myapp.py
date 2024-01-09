@@ -11,7 +11,7 @@ def extract_time(remaining_time):
     remaining_time_formatted = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
     return remaining_time_formatted
 
-def market_status(current_utc, market_tz, market_open, market_close, xx_time_zone, xx_label):
+def market_status(current_utc, market_tz, market_open, market_close):
     market_time = current_utc.astimezone(market_tz)
 
     if not is_weekday(market_time):
@@ -103,8 +103,8 @@ def update_clock():
 
     # Display the clock with the time zone label
     clock_container.markdown(f"**Time :** {current_time_formatted}")
-    stock1_container.markdown(market_status(current_time_utc, korean_tz, korean_market_open, korean_market_close, korea_time_zone, "Korea [9:00AM ~ 3:30PM (KST)] :"))
-    stock2_container.markdown(market_status(current_time_utc, us_tz, us_market_open, us_market_close, us_time_zone, "US [11:30PM ~ 6:00AM (KST)] :"))
+    stock1_container.markdown(market_status(current_time_utc, korean_tz, korean_market_open, korean_market_close))
+    stock2_container.markdown(market_status(current_time_utc, us_tz, us_market_open, us_market_close, us_time_zone))
 
 # Call the update_clock function every second
 while True:
