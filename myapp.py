@@ -1,6 +1,6 @@
 import streamlit as st
 import time
-from yfinance import Ticker
+#from yfinance import Ticker
 from datetime import datetime, timedelta
 
 def is_market_open(market, current_time):
