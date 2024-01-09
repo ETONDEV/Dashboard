@@ -11,7 +11,7 @@ def extract_time(remaining_time):
     remaining_time_formatted = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
     return remaining_time_formatted
 
-def market_status(current_utc, market_tz, market_open, market_close, xx_time_zone):
+def market_status(current_utc, market_tz, market_open, market_close):
     market_time = current_utc.astimezone(market_tz)
 
     if not is_weekday(market_time):
@@ -30,10 +30,10 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         remaining_time_formatted = extract_time(remaining_time)
         if market_tz == "Asia/Seoul":
             korea_market_status = "Opened"
-            korea_time_zone.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", korea_market_status, disabled=True, key="case_kr-1")
+            #korea_time_zone.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", korea_market_status, disabled=True, key="case_kr-1")
         else:
             us_market_status = "Opened"
-            us_time_zone.text_input("US [11:30PM ~ 6:00AM (KST)] :", us_market_status, disabled=True, key="case_us-1")
+            #us_time_zone.text_input("US [11:30PM ~ 6:00AM (KST)] :", us_market_status, disabled=True, key="case_us-1")
         return f"**Closes:** in {str(remaining_time_formatted)}"
         
     elif market_time < market_open_dt:
@@ -41,10 +41,10 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         remaining_time_formatted = extract_time(remaining_time)
         if market_tz == "Asia/Seoul":
             korea_market_status = "Closed"
-            korea_time_zone.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", korea_market_status, disabled=True, key="case_kr-2")
+            #korea_time_zone.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", korea_market_status, disabled=True, key="case_kr-2")
         else:
             us_market_status = "Closed"      
-            us_time_zone.text_input("US [11:30PM ~ 6:00AM (KST)] :", us_market_status, disabled=True, key="case_us-2")
+            #us_time_zone.text_input("US [11:30PM ~ 6:00AM (KST)] :", us_market_status, disabled=True, key="case_us-2")
         return f"**Opens:** in {str(remaining_time_formatted)}"
     else:
         next_open_dt = (market_open_dt + datetime.timedelta(days=1)).astimezone(pytz.utc)
@@ -52,10 +52,10 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         remaining_time_formatted = extract_time(remaining_time)
         if market_tz == "Asia/Seoul":
             korea_market_status = "Closed"
-            korea_time_zone.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", korea_market_status, disabled=True, key="case_kr-3")
+            #korea_time_zone.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", korea_market_status, disabled=True, key="case_kr-3")
         else:
             us_market_status = "Closed"     
-            us_time_zone.text_input("US [11:30PM ~ 6:00AM (KST)] :", us_market_status, disabled=True, key="case_us-3")
+            #us_time_zone.text_input("US [11:30PM ~ 6:00AM (KST)] :", us_market_status, disabled=True, key="case_us-3")
         return f"**Opens:** in {str(remaining_time_formatted)}"
 
 def is_weekday(dt):
@@ -115,9 +115,10 @@ def update_clock():
 
     # Display the clock with the time zone label
     clock_container.markdown(f"**Time:** {current_time_formatted}")
-    stock1_container.markdown(market_status(current_time_utc, korean_tz, korean_market_open, korean_market_close, korea_time_zone))
-    stock2_container.markdown(market_status(current_time_utc, us_tz, us_market_open, us_market_close, us_time_zone))
-
+    stock1_container.markdown(market_status(current_time_utc, korean_tz, korean_market_open, korean_market_close))
+    korea_time_zone.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", korea_market_status, disabled=True)
+    stock2_container.markdown(market_status(current_time_utc, us_tz, us_market_open, us_market_close))
+    us_time_zone.text_input("US [11:30PM ~ 6:00AM (KST)] :", us_market_status, disabled=True)
 # Call the update_clock function every second
 while True:
     update_clock()
