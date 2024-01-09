@@ -22,10 +22,10 @@ with col1:
     selected_time_zone = st.selectbox("Select Time Zone:", time_zones)
     clock_container = st.empty()
 with col2:
-    korea_time_zone = st.selectbox("Korea(9:00AM to 3:30PM (KST)", close_open)
+    korea_time_zone = st.selectbox("Korea(9:00AM ~ 3:30PM (KST)):", close_open)
     stock1_container = st.empty()
 with col3:
-    korea_time_zone = st.selectbox("America:", close_open)
+    korea_time_zone = st.selectbox("America(11:30PM ~ 6:00AM (KST)):", close_open)
     stock2_container = st.empty()
 def update_clock():
     # Get the current time in UTC
