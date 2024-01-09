@@ -1,8 +1,12 @@
-// myjs.js
-function updateTime() {
-    var now = new Date();
-    document.getElementById('current-time').innerHTML = now.toLocaleTimeString();
-    setTimeout(updateTime, 1000);
+// Function to update the clock every second
+function updateClock() {
+  const clockElement = document.getElementById("clock");
+  const currentTime = new Date().toLocaleTimeString();
+  clockElement.textContent = currentTime;
 }
 
-updateTime();
+// Set an initial timeout to start the clock
+setTimeout(updateClock, 1000);
+
+// Set an interval to update the clock every second
+setInterval(updateClock, 1000);
