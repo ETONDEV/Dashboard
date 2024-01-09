@@ -1,7 +1,13 @@
 import streamlit as st
 import time
+import datetime
 from datetime import datetime, timedelta  # Import datetime for tz-aware datetime
 from pytz import timezone
+
+now_utc = datetime.datetime.now(timezone.utc)
+now_korea = now_utc.astimezone(timezone("Asia/Seoul"))
+
+
 
 # Function to determine market status and time to open/close
 def get_market_status(market_timezone, market_open_time, market_close_time):
