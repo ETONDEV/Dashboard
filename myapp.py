@@ -24,8 +24,7 @@ def market_status(current_utc, market_tz, market_open, market_close):
     market_open_dt = market_time.replace(hour=market_open.hour, minute=market_open.minute, second=0, microsecond=0)
     market_close_dt = market_time.replace(hour=market_close.hour, minute=market_close.minute, second=0, microsecond=0)
 
-    korea_time_zone.
-    
+        
     if market_open_dt <= market_time < market_close_dt:
         remaining_time = market_close_dt - market_time
         remaining_time_formatted = extract_time(remaining_time)
