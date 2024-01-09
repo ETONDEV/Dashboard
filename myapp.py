@@ -28,23 +28,29 @@ def market_status(current_utc, market_tz, market_open, market_close):
     if market_open_dt <= market_time < market_close_dt:
         remaining_time = market_close_dt - market_time
         remaining_time_formatted = extract_time(remaining_time)
-        #xx_time_zone.text_input(f"Openned")
-        #xx_time_zone.text_input(xx_label, "Opened", key="case1", disabled=True)
-        return f"**Closes in** {str(remaining_time_formatted)}"
+        if market_tz == "Asia/Seoul":
+            korea_market_status = "Opened"
+        else:
+            us_market_status = "Opened"
+        return f"**Closes:** in {str(remaining_time_formatted)}"
         
     elif market_time < market_open_dt:
         remaining_time = market_open_dt - market_time
         remaining_time_formatted = extract_time(remaining_time)
-        #xx_time_zone.markdown(f"Closed")
-        #xx_time_zone.text_input(xx_label, "Closed", key="case2", disabled=True)
-        return f"**Opens in** {str(remaining_time_formatted)}"
+        if market_tz == "Asia/Seoul":
+            korea_market_status = "Closed"
+        else:
+            us_market_status = "Closed"      
+        return f"**Opens:** in {str(remaining_time_formatted)}"
     else:
         next_open_dt = (market_open_dt + datetime.timedelta(days=1)).astimezone(pytz.utc)
         remaining_time = next_open_dt - current_utc
         remaining_time_formatted = extract_time(remaining_time)
-        #xx_time_zone.markdown(f"Closed")
-        #xx_time_zone.text_input(xx_label, "Closed", key="case3", disabled=True)
-        return f"**Opens in** {str(remaining_time_formatted)}"
+        if market_tz == "Asia/Seoul":
+            korea_market_status = "Closed"
+        else:
+            us_market_status = "Closed"              
+        return f"**Opens:** in {str(remaining_time_formatted)}"
 
 def is_weekday(dt):
     return dt.weekday() < 5  # Monday is 0, Sunday is 6
@@ -102,7 +108,7 @@ def update_clock():
     current_time_formatted = current_time_localized.strftime("%Y-%m-%d(%a) %H:%M:%S")
 
     # Display the clock with the time zone label
-    clock_container.markdown(f"**Time :** {current_time_formatted}")
+    clock_container.markdown(f"**Time:** {current_time_formatted}")
     stock1_container.markdown(market_status(current_time_utc, korean_tz, korean_market_open, korean_market_close))
     stock2_container.markdown(market_status(current_time_utc, us_tz, us_market_open, us_market_close, us_time_zone))
 
