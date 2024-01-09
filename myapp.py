@@ -11,7 +11,7 @@ def extract_time(remaining_time):
     remaining_time_formatted = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
     return remaining_time_formatted
 
-def market_status(current_utc, market_tz, market_open, market_close, xx_time_zone):
+def market_status(current_utc, market_tz, market_open, market_close, xx_time_zone, xx_label):
     market_time = current_utc.astimezone(market_tz)
 
     if not is_weekday(market_time):
@@ -28,19 +28,22 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
     if market_open_dt <= market_time < market_close_dt:
         remaining_time = market_close_dt - market_time
         remaining_time_formatted = extract_time(remaining_time)
-        xx_time_zone.markdown(f"Openned")
+        #xx_time_zone.text_input(f"Openned")
+        xx_time_zone.text_input(xx_label, "Opened")
         return f"**Closes in** {str(remaining_time_formatted)}"
         
     elif market_time < market_open_dt:
         remaining_time = market_open_dt - market_time
         remaining_time_formatted = extract_time(remaining_time)
-        xx_time_zone.markdown(f"Closed")
+        #xx_time_zone.markdown(f"Closed")
+        xx_time_zone.text_input(xx_label, "Closed")
         return f"**Opens in** {str(remaining_time_formatted)}"
     else:
         next_open_dt = (market_open_dt + datetime.timedelta(days=1)).astimezone(pytz.utc)
         remaining_time = next_open_dt - current_utc
         remaining_time_formatted = extract_time(remaining_time)
-        xx_time_zone.markdown(f"Closed")
+        #xx_time_zone.markdown(f"Closed")
+        xx_time_zone.text_input(xx_label, "Closed")
         return f"**Opens in** {str(remaining_time_formatted)}"
 
 def is_weekday(dt):
@@ -99,8 +102,8 @@ def update_clock():
 
     # Display the clock with the time zone label
     clock_container.markdown(f"**Time :** {current_time_formatted}")
-    stock1_container.markdown(market_status(current_time_utc, korean_tz, korean_market_open, korean_market_close, korea_time_zone))
-    stock2_container.markdown(market_status(current_time_utc, us_tz, us_market_open, us_market_close, us_time_zone))
+    stock1_container.markdown(market_status(current_time_utc, korean_tz, korean_market_open, korean_market_close, korea_time_zone, "Korea [9:00AM ~ 3:30PM (KST)] :"))
+    stock2_container.markdown(market_status(current_time_utc, us_tz, us_market_open, us_market_close, us_time_zone, "US [11:30PM ~ 6:00AM (KST)] :"))
 
 # Call the update_clock function every second
 while True:
