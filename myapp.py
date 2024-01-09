@@ -9,10 +9,10 @@ st.title("Live Clock")
 
 # Create a list of time zones with their labels
 time_zones = [
-    ("Asia/Dubai", "(GMT +4)"),
-    ("Europe/London", "(GMT +0)"),
-    ("Asia/Seoul", "(GMT +9)"),
-    ("America/Los_Angeles", "(GMT -8)"),
+    {"Asia/Dubai", "(GMT +4)"},
+    {"Europe/London", "(GMT +0)"},
+    {"Asia/Seoul", "(GMT +9)"},
+    {"America/Los_Angeles", "(GMT -8)"},
     # Add more time zones as needed
 ]
 
@@ -33,7 +33,7 @@ def update_clock():
     current_time_formatted = current_time_localized.strftime("%H:%M:%S")
 
     # Display the clock with the time zone label
-    clock_container.markdown(f"**Current Time in {selected_time_zone[1]}:** {current_time_formatted}")
+    clock_container.markdown(f"**Current Time :** {current_time_formatted}")
 
 # Call the update_clock function every second
 while True:
