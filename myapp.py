@@ -30,8 +30,10 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         remaining_time_formatted = extract_time(remaining_time)
         if market_tz == "Asia/Seoul":
             korea_market_status = "Opened"
+            korea_time_zone.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", korea_market_status, disabled=True)
         else:
             us_market_status = "Opened"
+            us_time_zone.text_input("US [11:30PM ~ 6:00AM (KST)] :", us_market_status, disabled=True)
         return f"**Closes:** in {str(remaining_time_formatted)}"
         
     elif market_time < market_open_dt:
@@ -39,8 +41,10 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         remaining_time_formatted = extract_time(remaining_time)
         if market_tz == "Asia/Seoul":
             korea_market_status = "Closed"
+            korea_time_zone.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", korea_market_status, disabled=True)
         else:
             us_market_status = "Closed"      
+            us_time_zone.text_input("US [11:30PM ~ 6:00AM (KST)] :", us_market_status, disabled=True)
         return f"**Opens:** in {str(remaining_time_formatted)}"
     else:
         next_open_dt = (market_open_dt + datetime.timedelta(days=1)).astimezone(pytz.utc)
@@ -48,8 +52,10 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         remaining_time_formatted = extract_time(remaining_time)
         if market_tz == "Asia/Seoul":
             korea_market_status = "Closed"
+            korea_time_zone.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", korea_market_status, disabled=True)
         else:
-            us_market_status = "Closed"              
+            us_market_status = "Closed"     
+            us_time_zone.text_input("US [11:30PM ~ 6:00AM (KST)] :", us_market_status, disabled=True)
         return f"**Opens:** in {str(remaining_time_formatted)}"
 
 def is_weekday(dt):
