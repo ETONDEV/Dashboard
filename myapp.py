@@ -19,14 +19,18 @@ def market_status(current_utc, market_tz, market_open, market_close):
 
     if market_open_dt <= market_time < market_close_dt:
         remaining_time = market_close_dt - market_time
-        return f"Open - Closes in {str(remaining_time)}"
+        remaining_time_formatted = remaining_time.strftime("%H:%M:%S")
+        return f"Closes in {str(remaining_time_formatted)}"
+        
     elif market_time < market_open_dt:
         remaining_time = market_open_dt - market_time
-        return f"Closed - Opens in {str(remaining_time)}"
+        remaining_time_formatted = remaining_time.strftime("%H:%M:%S")
+        return f"Opens in {str(remaining_time_formatted)}"
     else:
         next_open_dt = (market_open_dt + datetime.timedelta(days=1)).astimezone(pytz.utc)
         remaining_time = next_open_dt - current_utc
-        return f"Closed - Opens in {str(remaining_time)}"
+        remaining_time_formatted = remaining_time.strftime("%H:%M:%S")
+        return f"Opens in {str(remaining_time_formatted)}"
 
 def is_weekday(dt):
     return dt.weekday() < 5  # Monday is 0, Sunday is 6
