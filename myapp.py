@@ -114,8 +114,9 @@ with tab1:
     st.markdown(get_tickers())
 with tab2:
     all_coin_list = get_tickers()
-    sac.transfer(items=[all_coin_list], label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)#st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
-   #st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
+    all_coin_number = len(all_coin_list)
+    sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)#st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
+   #st.image("https://static.streamlit.io/examples/dog.jpg", width=200) f'item{i}' for i in range(30)
 with tab3:
     st.header("An owl")
    #st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
