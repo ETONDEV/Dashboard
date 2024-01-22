@@ -74,7 +74,7 @@ close_open = ['Closed', 'Opened']
 # Create a container for the clock
 
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3 = st.columns(4,3,3)
 with col1:
     selected_time_zone = st.selectbox("Select Time Zone :", time_zones)
     clock_container = st.empty()
