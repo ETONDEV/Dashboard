@@ -95,8 +95,7 @@ with col4:
 tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
 
 with tab1:
-    sac.transfer(items=[f'item{i}' for i in range(30)], label='label', index=[0, 1], titles=['source', 'target'], reload=True, align='center', search=True, pagination=True)    
-   #st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
+    sac.transfer(items=[f'item{i}' for i in range(30)], label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)#st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
 
 with tab2:
     st.header("A dog")
