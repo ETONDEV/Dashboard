@@ -74,12 +74,12 @@ close_open = ['Closed', 'Opened']
 # Create a container for the clock
 
 
-col1, col2, col3, col4 = st.columns([3, 3, 2, 2])
+col1, col2, col3, col4 = st.columns([4, 1, 2.5, 2.5])
 with col1:
     selected_time_zone = st.selectbox("Select Time Zone :", time_zones)
     clock_container = st.empty()
 with col2:
-    "dd"
+    ""
 with col3:
     #korea_time_zone = st.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", close_open)
     "Korea Market:"
