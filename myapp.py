@@ -5,6 +5,19 @@ import pytz  # Import pytz for time zone support
 import streamlit_antd_components as sac
 
 #======================def START=========================
+#===========Upbit START=============
+def get_tickers():
+    url = "https://api.upbit.com/v1/market/all"
+    headers = {"accept": "application/json"}
+    response = requests.get(url, headers=headers)
+    data = response.json()
+    tickers = []
+    for market in data:
+        if market['market'].startswith("KRW"):
+            tickers.append(market['market'])
+    return tickers
+
+#===========Upbit END=============
 def extract_time(remaining_time):
     # Extract hours, minutes, and seconds from the timedelta object
     hours, remainder = divmod(remaining_time.seconds, 3600)
@@ -96,6 +109,7 @@ tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
 
 with tab1:
     st.header("Main")
+    st.markdown(get_tickers())
 
 with tab2:    
     sac.transfer(items=[f'item{i}' for i in range(30)], label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)#st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
