@@ -79,7 +79,7 @@ with col1:
     selected_time_zone = st.selectbox("Select Time Zone :", time_zones)
     clock_container = st.empty()
 with col2:
-    st.markdown("s") #공백추가 디자인 
+    "dd"
 with col3:
     #korea_time_zone = st.text_input("Korea [9:00AM ~ 3:30PM (KST)] :", close_open)
     "Korea Market:"
