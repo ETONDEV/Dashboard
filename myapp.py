@@ -112,7 +112,6 @@ all_coin_list = []
 tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
 with tab1:
     st.header("Main")
-    st.markdown(coin_selected)
     coin_selected = st.empty()
 with tab2:
     all_coin_list = get_tickers()
