@@ -3,6 +3,7 @@ import time
 import datetime
 import pytz  # Import pytz for time zone support
 import streamlit_antd_components as sac
+import requests
 
 #======================def START=========================
 #===========Upbit START=============
