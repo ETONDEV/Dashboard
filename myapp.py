@@ -132,10 +132,6 @@ trade_price = [] #현재가
 
 all_coin_list = []
 
-#현재가
-#trade_price = []
-#for m in range(0,coin_number):
-#    trade_price.append(data[m]['trade_price'])
 all_coin_list = get_tickers()
 
 tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
@@ -151,7 +147,7 @@ with tab2:
     
     #현재가
     for m in range(0,coin_number):
-        trade_price.append(data[m]['trade_price'])
+        trade_price.append(coin_data[m]['trade_price'])
     #trade_price = [data[i]['trade_price'] for i in range(0, coin_number)]
     #st.write(trade_price)
     
