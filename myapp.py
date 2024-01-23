@@ -155,7 +155,7 @@ with tab2:
     #trade_price = [data[i]['trade_price'] for i in range(0, coin_number)]
     #st.write(trade_price)
     
-    coin_df = pd.DataFrame({'Name': coin_array})
+    coin_df = pd.DataFrame({'Name': coin_array, 'Price': trade_price})
     coin_selected2.dataframe(coin_df)
     coin_string = ','.join(coin_array)    
     coin_data = get_ticker_price(coin_string)
