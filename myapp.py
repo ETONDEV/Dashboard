@@ -163,12 +163,12 @@ with tab3:
    #st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
     
 def update_coin_data():
-    global coin_array, trade_price, coin_string, coin_number
+    global coin_array, trade_price, coin_string, coin_number, coin_array_noKRW
     #coin_string = ','.join(coin_array)
     coin_data = get_ticker_price(coin_string)
     #trade_price = coin_data[i]['trade_price'] for i in range(0, coin_number)]
     trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)]
-    coin_df = pd.DataFrame({'Name': coin_array, 'Price': trade_price})
+    coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price})
     coin_selected2.dataframe(coin_df)
     
 def update_clock():
