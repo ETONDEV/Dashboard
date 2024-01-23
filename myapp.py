@@ -138,8 +138,8 @@ with tab2:
     coin_array = coin_selected.write(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True))
     #coin_number = len(coin_array)
 
-    coin_string = ','.join(coin_array)
-    coin_selected2.write(coin_string)
+    #coin_string = ','.join(coin_array)
+    #coin_selected2.write(coin_string)
     
     #coin_selected.write(get_ticker_price(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)))
     
