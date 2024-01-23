@@ -4,6 +4,7 @@ import datetime
 import pytz  # Import pytz for time zone support
 import streamlit_antd_components as sac
 import requests
+import os
 
 #======================def START=========================
 #===========Upbit START=============
@@ -134,7 +135,8 @@ with tab1:
 with tab2:
     all_coin_list = get_tickers()
     selected_coin_list = coin_selected.write(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True))
-    print(selected_coin_list)
+    #print(selected_coin_list)
+    os.write(1,selected_coin_list)
     coin_selected2.write(get_ticker_price(selected_coin_list))
     
     #coin_selected.write(get_ticker_price(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)))
