@@ -144,6 +144,8 @@ with tab2:
     coin_array = sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)
     coin_number = len(coin_array)
     #coin_selected.write(coin_number)
+    coin_string = ','.join(coin_array)    
+    coin_data = get_ticker_price(coin_string) #선택된 코인 data 가져오기
     
     #현재가
     for m in range(0,coin_number):
@@ -153,8 +155,7 @@ with tab2:
     
     coin_df = pd.DataFrame({'Name': coin_array, 'Price': trade_price})
     coin_selected2.dataframe(coin_df)
-    coin_string = ','.join(coin_array)    
-    coin_data = get_ticker_price(coin_string)
+    
 with tab3:
     st.header("An owl")
    #st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
