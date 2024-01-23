@@ -138,12 +138,8 @@ all_coin_list = []
 all_coin_list = get_tickers()
 
 tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
+
 with tab1:
-    coin_array = sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)
-    coin_selected.write(coin_array)
-    coin_string = ','.join(coin_array)    
-    coin_data = get_ticker_price(coin_string)
-with tab2:
     st.header("Main")
     coin_selected = st.empty()
     coin_selected2 = st.empty()
@@ -151,7 +147,11 @@ with tab2:
     #df = pd.DataFrame({'Name': coin_array, 'Price': trade_price})
     #df = pd.DataFrame({'Name': [1, 2], 'Updown': [1, 2], 'Price': [1, 2], 'change(%)': [1, 2], 'change(KRW)': [1, 2], 'A/B Ratio': [1, 2], 'Ask': [1, 2], 'vs': [1, 2], 'Bid': [1, 2]})
     st.dataframe(df)
-
+with tab2:
+    coin_array = sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)
+    coin_selected.write(coin_array)
+    coin_string = ','.join(coin_array)    
+    coin_data = get_ticker_price(coin_string)
 with tab3:
     st.header("An owl")
    #st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
