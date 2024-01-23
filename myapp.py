@@ -130,12 +130,20 @@ coin_string = ""
 coin_data = []
 
 all_coin_list = []
+
+#현재가
+#trade_price = []
+#for m in range(0,coin_number):
+#    trade_price.append(data[m]['trade_price'])
+        
 tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
 with tab1:
     st.header("Main")
     coin_selected = st.empty()
     coin_selected2 = st.empty()
-    df = pd.DataFrame({'Name': [1, 2], 'Updown': [1, 2], 'Price': [1, 2], 'change(%)': [1, 2], 'change(KRW)': [1, 2], 'A/B Ratio': [1, 2], 'Ask': [1, 2], 'vs': [1, 2], 'Bid': [1, 2]})
+    df = pd.DataFrame({'Name': coin_array})
+    #df = pd.DataFrame({'Name': coin_array, 'Price': trade_price})
+    #df = pd.DataFrame({'Name': [1, 2], 'Updown': [1, 2], 'Price': [1, 2], 'change(%)': [1, 2], 'change(KRW)': [1, 2], 'A/B Ratio': [1, 2], 'Ask': [1, 2], 'vs': [1, 2], 'Bid': [1, 2]})
     st.dataframe(df)
 with tab2:
     all_coin_list = get_tickers()
