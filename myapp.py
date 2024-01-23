@@ -187,5 +187,5 @@ def update_clock():
 # Call the update_clock function every second
 while True:
     update_clock()
-    update_trade_price()
+    update_coin_data()
     time.sleep(1)
