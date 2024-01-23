@@ -150,7 +150,7 @@ with tab2:
     #현재가
     #for m in range(0,coin_number):
     #    trade_price.append(coin_data[m]['trade_price'])
-    trade_price = [coin_data[i]['trade_price'] for i in range(0, coin_number)]
+    trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)]
     #st.write(trade_price)
     
     coin_df = pd.DataFrame({'Name': coin_array, 'Price': trade_price})
@@ -164,7 +164,8 @@ def update_coin_data():
     global coin_array, trade_price, coin_string, coin_number
     #coin_string = ','.join(coin_array)
     coin_data = get_ticker_price(coin_string)
-    trade_price = coin_data[i]['trade_price'] for i in range(0, coin_number)]
+    #trade_price = coin_data[i]['trade_price'] for i in range(0, coin_number)]
+    trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)]
     coin_df = pd.DataFrame({'Name': coin_array, 'Price': trade_price})
     coin_selected2.dataframe(coin_df)
     
