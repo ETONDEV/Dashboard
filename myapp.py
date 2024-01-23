@@ -124,7 +124,7 @@ with col4:
     stock2_container = st.empty()
 
 coin_array = []
-coin_number = ""
+coin_number = 0
 coin_string = ""
 
 all_coin_list = []
