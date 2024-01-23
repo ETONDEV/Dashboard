@@ -136,7 +136,8 @@ with tab1:
 with tab2:
     all_coin_list = get_tickers()
     coin_array = coin_selected.write(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True))
-    st.echo("dd")
+    with st.echo():
+        st.write('This code will be printed')
     #coin_number = len(coin_array)
 
     #coin_string = ','.join(coin_array)
