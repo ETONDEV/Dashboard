@@ -130,10 +130,14 @@ tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
 with tab1:
     st.header("Main")
     coin_selected = st.empty()
+    coin_selected2 = st.empty()
 with tab2:
     all_coin_list = get_tickers()
-    #all_coin_number = len(all_coin_list)
-    coin_selected.write(get_ticker_price(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)))
+    selected_coin_list = coin_selected.write(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True))
+
+    coin_selected2.write(get_ticker_price(selected_coin_list))
+    
+    #coin_selected.write(get_ticker_price(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)))
     
    #st.image("https://static.streamlit.io/examples/dog.jpg", width=200) f'item{i}' for i in range(30)
    #coin_selected.write(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True))
