@@ -4,7 +4,6 @@ import datetime
 import pytz  # Import pytz for time zone support
 import streamlit_antd_components as sac
 import requests
-import os
 
 #======================def START=========================
 #===========Upbit START=============
@@ -124,9 +123,11 @@ with col4:
     us_time_zone = st.empty()
     stock2_container = st.empty()
 
+coin_array = []
+coin_number = ""
+coin_string = ""
 
 all_coin_list = []
-#coin_selected = ""
 tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
 with tab1:
     st.header("Main")
@@ -134,10 +135,11 @@ with tab1:
     coin_selected2 = st.empty()
 with tab2:
     all_coin_list = get_tickers()
-    selected_coin_list = coin_selected.write(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True))
-    #print(selected_coin_list)
-    os.write(1,selected_coin_list)
-    coin_selected2.write(get_ticker_price(selected_coin_list))
+    coin_array = coin_selected.write(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True))
+    coin_number = len(coin_array)
+
+    coin_string = ','.join(coin_array)
+    coin_selected2.write(get_ticker_price(coin_string))
     
     #coin_selected.write(get_ticker_price(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)))
     
