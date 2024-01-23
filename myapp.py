@@ -135,7 +135,8 @@ with tab1:
     coin_selected2 = st.empty()
 with tab2:
     all_coin_list = get_tickers()
-    coin_array = coin_selected.write(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True))
+    coin_array = sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)
+    coin_selected.write(coin_array)
     coin_string = ''.join(coin_array)
     coin_selected2.write(coin_string)
     
