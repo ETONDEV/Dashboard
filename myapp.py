@@ -161,7 +161,7 @@ with tab3:
    #st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
     
 def update_coin_data():
-    if coin_array:
+    global coin_array, trade_price
     coin_string = ','.join(coin_array)    
     coin_data = get_ticker_price(coin_string)
     trade_price = [coin_data[m]['trade_price'] for m in range(len(coin_array))]
@@ -182,9 +182,10 @@ def update_clock():
     clock_container.markdown(f"**Time :** {current_time_formatted}")
     stock1_container.markdown(market_status(current_time_utc, korean_tz, korean_market_open, korean_market_close, korea_time_zone))
     stock2_container.markdown(market_status(current_time_utc, us_tz, us_market_open, us_market_close, us_time_zone))
-    update_trade_price()
+    
     
 # Call the update_clock function every second
 while True:
     update_clock()
+    update_trade_price()
     time.sleep(1)
