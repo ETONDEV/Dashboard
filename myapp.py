@@ -145,7 +145,7 @@ with tab1:
 with tab2:
     coin_array = sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)
     coin_number = len(coin_array)
-    coin_selected.write(coin_array)
+    coin_selected.write(coin_number)
     df = pd.DataFrame({'Name': coin_array})
     coin_selected2.dataframe(df)
     coin_string = ','.join(coin_array)    
