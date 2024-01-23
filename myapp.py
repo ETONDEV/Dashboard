@@ -128,6 +128,8 @@ coin_array = []
 coin_string = ""
 coin_data = []
 
+trade_price = [] #현재가
+
 all_coin_list = []
 
 #현재가
@@ -145,9 +147,16 @@ with tab1:
 with tab2:
     coin_array = sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)
     coin_number = len(coin_array)
-    coin_selected.write(coin_number)
-    df = pd.DataFrame({'Name': coin_array})
-    coin_selected2.dataframe(df)
+    #coin_selected.write(coin_number)
+    
+    #현재가
+    for m in range(0,coin_number):
+        trade_price.append(data[m]['trade_price'])
+    #trade_price = [data[i]['trade_price'] for i in range(0, coin_number)]
+    #st.write(trade_price)
+    
+    coin_df = pd.DataFrame({'Name': coin_array})
+    coin_selected2.dataframe(coin_df)
     coin_string = ','.join(coin_array)    
     coin_data = get_ticker_price(coin_string)
 with tab3:
