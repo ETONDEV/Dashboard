@@ -133,9 +133,10 @@ with tab1:
 with tab2:
     all_coin_list = get_tickers()
     #all_coin_number = len(all_coin_list)
-    coin_selected.write(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True))
+    coin_selected.write(get_ticker_price(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)))
     
    #st.image("https://static.streamlit.io/examples/dog.jpg", width=200) f'item{i}' for i in range(30)
+   #coin_selected.write(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True))
 with tab3:
     st.header("An owl")
    #st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
