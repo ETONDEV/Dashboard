@@ -137,9 +137,9 @@ all_coin_list = get_tickers()
 tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
 
 with tab1:
-    st.header("Main")
-    coin_selected = st.empty()
-    coin_selected2 = st.empty()
+    #st.header("Main")
+    #coin_selected = st.empty()
+    coin_dataframe = st.empty()
 with tab2:
     coin_array = sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)
     coin_array_noKRW = [coin.replace('KRW-', '') for coin in coin_array]
@@ -156,7 +156,7 @@ with tab2:
     #st.write(trade_price)
     
     coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price})
-    coin_selected2.dataframe(coin_df)
+    coin_dataframe.dataframe(coin_df)
     
 with tab3:
     st.header("An owl")
@@ -169,7 +169,7 @@ def update_coin_data():
     #trade_price = coin_data[i]['trade_price'] for i in range(0, coin_number)]
     trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)]
     coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price})
-    coin_selected2.dataframe(coin_df)
+    coin_dataframe.dataframe(coin_df)
     
 def update_clock():
     # Get the current time in UTC
