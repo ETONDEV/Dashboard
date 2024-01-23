@@ -4,6 +4,7 @@ import datetime
 import pytz  # Import pytz for time zone support
 import streamlit_antd_components as sac
 import requests
+import pandas as pd
 
 #======================def START=========================
 #===========Upbit START=============
@@ -126,6 +127,7 @@ with col4:
 coin_array = []
 coin_number = 0
 coin_string = ""
+coin_data = []
 
 all_coin_list = []
 tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
@@ -133,18 +135,13 @@ with tab1:
     st.header("Main")
     coin_selected = st.empty()
     coin_selected2 = st.empty()
+    df = pd.DataFrame({'Name': [1, 2], 'Updown': [1, 2], 'Price': [1, 2], 'change(%)': [1, 2], 'change(KRW)': [1, 2], 'A/B Ratio': [1, 2], 'Ask': [1, 2], 'vs': [1, 2], 'Bid': [1, 2]})
 with tab2:
     all_coin_list = get_tickers()
     coin_array = sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)
     coin_selected.write(coin_array)
-    coin_string = ','.join(coin_array)
-    
-    coin_selected2.write(get_ticker_price(coin_string))
-    
-    #coin_selected.write(get_ticker_price(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)))
-    
-   #st.image("https://static.streamlit.io/examples/dog.jpg", width=200) f'item{i}' for i in range(30)
-   #coin_selected.write(sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True))
+    coin_string = ','.join(coin_array)    
+    coin_data = get_ticker_price(coin_string)
 with tab3:
     st.header("An owl")
    #st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
