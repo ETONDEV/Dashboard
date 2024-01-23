@@ -7,6 +7,7 @@ import requests
 
 #======================def START=========================
 #===========Upbit START=============
+#종목리스트 가져오기
 def get_tickers():
     url = "https://api.upbit.com/v1/market/all"
     headers = {"accept": "application/json"}
@@ -18,6 +19,22 @@ def get_tickers():
             tickers.append(market['market'])
     return tickers
 
+#종목 현재가 가져오기
+def get_ticker_price(market):
+    url = f"https://api.upbit.com/v1/ticker?markets={market}"
+    headers = {"accept": "application/json"}
+    response = requests.get(url, headers=headers)
+    data = response.json()
+    return data
+
+#종목 오더북 가져오기
+def get_order_price(market):
+    url = f"https://api.upbit.com/v1/orderbook?markets={market}"
+    headers = {"accept": "application/json"}
+    response = requests.get(url, headers=headers)
+    data = response.json()
+    return data
+    
 #===========Upbit END=============
 def extract_time(remaining_time):
     # Extract hours, minutes, and seconds from the timedelta object
