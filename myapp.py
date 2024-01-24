@@ -171,7 +171,7 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         remaining_time = market_close_dt - market_time
         remaining_time_formatted = extract_time(remaining_time)
         xx_time_zone.markdown(f"[Openned]")
-        if market_tz == "Asia/Seoul":
+        if market_tz == 'Asia/Seoul':
             stock_test.markdown("오픈")
         else:
             stock_test.markdown(market_tz)
@@ -181,7 +181,7 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         remaining_time = market_open_dt - market_time
         remaining_time_formatted = extract_time(remaining_time)
         xx_time_zone.markdown(f"[Closed]")
-        if market_tz == "Asia/Seoul":
+        if market_tz == 'Asia/Seoul':
             stock_test.markdown("닫음1")
         else:
             stock_test.markdown(market_tz)            
@@ -191,7 +191,7 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         remaining_time = next_open_dt - current_utc
         remaining_time_formatted = extract_time(remaining_time)
         xx_time_zone.markdown(f"[Closed]")
-        if market_tz == "Asia/Seoul":
+        if market_tz == 'Asia/Seoul':
             stock_test.markdown("닫음2")
         else:
             stock_test.markdown(market_tz)            
