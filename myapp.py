@@ -183,7 +183,7 @@ def update_stock_data():
     #stock_test2.text_input("output", stock_data[0]['종목명'])
 
     #Dataframe 뿌려주기(초기값)
-    stock_df = pd.DataFrame({'Name': st_trade_name, 'Price': st_trade_price, 'Trd': st_up_down, '%': st_signed_change_rate, 'Change': st_signed_change_price, 'Tr. Time': st_trade_time, 'Status': st_trade_status})
+    stock_df = pd.DataFrame({'Name': st_trade_name, 'Price': st_trade_price, 'Trd': st_up_down, '%': st_signed_change_rate, 'Change': st_signed_change_price, 'Tr. Time': st_trade_time, 'Status': st_trade_time_status})
     stock_df_sorted = stock_df.sort_values(by=['Price'], ascending=False)
     stock_dataframe.dataframe(stock_df_sorted)
 
