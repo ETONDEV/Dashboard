@@ -171,7 +171,7 @@ def update_stock_data():
     
             # 추출한 값을 리스트에 추가
             st_trade_time.append(var1)
-            st_trade_status.append(var2)
+            st_trade_time_status.append(var2)
             
         
     #change_symbols = {"FALL": "▽", "EVEN": "〓", "RISE": "▲"}
