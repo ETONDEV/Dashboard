@@ -135,7 +135,8 @@ def update_stock_data():
     
     #현재가
     st_trade_name = [stock_data[i]['종목명'] for i in range(stock_number)]
-    st_trade_price = [int(stock_data[i]['현재가']) for i in range(stock_number)]
+    #st_trade_price = [int(stock_data[i]['현재가']) for i in range(stock_number)]
+    st_trade_price = [int(stock_data[i]['현재가'].replace(',', '')) for i in range(stock_number)]
     st_trade_trd = [stock_data[i]['현재가'] - stock_data[i]['전일가'] for i in range(stock_number)]
     
 
