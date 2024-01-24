@@ -154,6 +154,8 @@ def extract_time(remaining_time):
 def market_status(current_utc, market_tz, market_open, market_close, xx_time_zone):
     market_time = current_utc.astimezone(market_tz)
 
+    stock_test.markdown(market_tz)
+    
     if not is_weekday(market_time):
         return "Closed - Opens on next weekday"
 
@@ -169,6 +171,8 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         remaining_time = market_close_dt - market_time
         remaining_time_formatted = extract_time(remaining_time)
         xx_time_zone.markdown(f"[Openned]")
+        #if xx_time_zone == :
+        #    kor_market_open_flag = 1
         return f"**Closes** : in {str(remaining_time_formatted)}"
         
     elif market_time < market_open_dt:
@@ -199,7 +203,7 @@ korean_market_open = datetime.time(9, 0, 0)  # 9:00 AM KST
 korean_market_close = datetime.time(15, 30, 0)  # 3:30 PM KST
 us_market_open = datetime.time(9, 30, 0)  # 9:30 AM ET
 us_market_close = datetime.time(16, 0, 0)  # 4:00 PM ET
-
+kor_market_open_flag = 0
 #======================var END=========================
 
 st.set_page_config(page_title="♣Etonboard♣")
@@ -294,8 +298,8 @@ while True:
     update_clock()
     update_coin_data()
     #장오픈중일때만 if 추가
-    if counter % 10 == 0:
-        update_stock_data()
-        counter = 0
+    #if counter % 10 == 0:
+    #    update_stock_data()
+    #    counter = 0
     time.sleep(1)
     counter += 1
