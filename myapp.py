@@ -173,7 +173,7 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         xx_time_zone.markdown(f"[Openned]")
         if "Seoul" in str(market_tz):
             kor_market_open_flag = 1
-            stock_test.markdown("오픈")
+            stock_test.markdown(f"오픈 - {kor_market_open_flag}")
         #else:
         #    stock_test.markdown(market_tz)
         return f"**Closes** : in {str(remaining_time_formatted)}"
@@ -184,7 +184,7 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         xx_time_zone.markdown(f"[Closed]")
         if "Seoul" in str(market_tz):
             kor_market_open_flag = 0
-            stock_test.markdown("닫음1")
+            stock_test.markdown(f"닫음1 - {kor_market_open_flag}")
         #else:
         #    stock_test.markdown(market_tz)            
         return f"**Opens** : in {str(remaining_time_formatted)}"
@@ -195,7 +195,7 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         xx_time_zone.markdown(f"[Closed]")
         if "Seoul" in str(market_tz):
             kor_market_open_flag = 0
-            stock_test.markdown("닫음2")
+            stock_test.markdown(f"닫음2 - {kor_market_open_flag}")
         #else:
         #    stock_test.markdown(market_tz)            
         return f"**Opens** : in {str(remaining_time_formatted)}"
