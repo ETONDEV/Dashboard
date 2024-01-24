@@ -141,9 +141,9 @@ def update_stock_data():
     st_signed_change_price = [int(stock_data[i]['현재가'].replace(',', '')) - int(stock_data[i]['전일가'].replace(',', '')) for i in range(stock_number)]
     st_signed_change_rate = ["{:.2f}%".format((float(stock_data[i]['현재가'].replace(',', '')) - float(stock_data[i]['전일가'].replace(',', '')))/float(stock_data[i]['전일가'].replace(',', '')) * 100) for i in range(stock_number)]
     for i in range(stock_number):
-        if st_trade_price[i] > 0:
+        if st_signed_change_price[i] > 0:
             st_up_down_tmp = "▲"
-        elif st_trade_price[i] < 0:
+        elif st_signed_change_price[i] < 0:
             st_up_down_tmp = "▽"
         else:
             st_up_down_tmp = "〓"
