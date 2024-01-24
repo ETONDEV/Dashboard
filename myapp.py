@@ -127,7 +127,8 @@ def update_stock_data():
 
     for code in stock_array:
         info = get_all_info(code)
-    stock_test.write(info)
+    #stock_test.write(info)
+    stock_test.text_input("output", info)
 
 #===========Stock END=============
 def extract_time(remaining_time):
