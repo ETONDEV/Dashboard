@@ -87,7 +87,7 @@ def update_coin_data():
     #Dataframe 뿌려주기(초기값)
     coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price, 'Trd': up_down, '%': signed_change_rate, 'Change': signed_change_price, 'A/B': sum_ask_bid_rate, 'Ask': sum_ask_size, 'Cmpr': compare, 'Bid': sum_bid_size})
     coin_df_sorted = coin_df.sort_values(by=['Price'], ascending=False)
-    coin_dataframe.dataframe(coin_df_sorted) 
+    coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True)
     
 #===========Upbit END=============
 
@@ -191,7 +191,7 @@ def update_stock_data():
     #Dataframe 뿌려주기(초기값)
     stock_df = pd.DataFrame({'Name': st_trade_name, 'Price': st_trade_price, 'Trd': st_up_down, '%': st_signed_change_rate, 'Change': st_signed_change_price, 'Tr. Time': st_trade_time, 'Status': st_trade_time_status})
     stock_df_sorted = stock_df.sort_values(by=['Price'], ascending=False)
-    stock_dataframe.dataframe(stock_df_sorted)
+    stock_dataframe.dataframe(stock_df_sorted, hide_index=True, use_container_width=True)
 
 #===========Stock END=============
 
