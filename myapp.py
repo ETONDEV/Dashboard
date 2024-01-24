@@ -38,7 +38,7 @@ def get_order_price(market):
 
 #코인 메인 표
 def update_coin_data():
-    global coin_array, trade_price, coin_string, coin_number, coin_array_noKRW, signed_change_rate, signed_change_price, up_down
+    global coin_array, trade_price, coin_string, coin_number, coin_array_noKRW, signed_change_rate, signed_change_price, up_down, sum_ask_size, sum_bid_size
     coin_data = get_ticker_price(coin_string) #선택된 코인 data 가져오기
     coin_orderbook = get_order_price(coin_string)
     
