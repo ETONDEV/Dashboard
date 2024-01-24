@@ -119,6 +119,7 @@ def change_info_format(current_info):
 
 #주식 메인 표
 def update_stock_data():
+    global info
     #global stock_array
     stock_input = "005930, 035720, 035420" #★★★★★★★★★★★★★종목입력★★★★★★★★★★★★★
     stock_input_tmp = stock_input.replace(" ", "")
@@ -220,16 +221,15 @@ with col4:
     us_time_zone = st.empty()
     stock2_container = st.empty()
 
+# 코인 전체목록 불러오기
 coin_array = []
 coin_string = ""
 coin_data = []
-
-
-
 all_coin_list = []
-
-# 코인 전체목록 불러오기
 all_coin_list = get_tickers()
+
+# 주식 관련
+info = []
 
 # 초기 코인선택 대상 설정
 text_values = ["KRW-BTC", "KRW-ETH", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-ETC", "KRW-SAND", "KRW-XEC"]
