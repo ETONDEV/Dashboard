@@ -215,7 +215,8 @@ def exchange_rate():
     for item in items:
         name = item.select('td')[0].text.replace("\n", "").replace("\t", "")
         if name in desired_countries:
-            print(name + "\t" + item.select('td')[1].text)
+            #print(name + "\t" + item.select('td')[1].text)
+            usd_rate.markdown(name + "\t" + item.select('td')[1].text)
 
 #===========환율 END=============
 def extract_time(remaining_time):
