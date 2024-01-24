@@ -209,20 +209,18 @@ def exchange_rate():
     frame_soup = bs.BeautifulSoup(res1.content, 'html.parser')
     items = frame_soup.select('body > div > table > tbody > tr')
 
-    exchange_rate_array = []
-    # 출력하고자 하는 국가 정보를 리스트로 정의
-    rates = {}
+    # 각 국가별 환율 정보를 딕셔너리로 저장
+    exchange_rates = {}
     desired_countries = ["미국 USD", "유럽연합 EUR", "일본 JPY (100엔)", "아랍에미리트 AED"]
 
     for item in items:
-        name = item.select('td')[0].text.replace("\n", "").replace("\t", "")
-        if name in desired_countries:
-            exchange_rate_array.append(item.select('td')[1].text)
-        
-    #usd_rate.markdown(exchange_rate_array)
+        country_name = item.select('td')[0].text.replace("\n", "").replace("\t", "")
+        if country_name in desired_countries:
+            rate = item.select('td')[1].text
+            exchange_rates[country_name] = rate
 
-    #Dataframe 뿌려주기(초기값)
-    ex_rate_df = pd.DataFrame([rates])
+    # 데이터프레임 생성 (가로 형태)
+    ex_rate_df = pd.DataFrame([exchange_rates])
     ex_rate_dataframe.dataframe(ex_rate_df)
             #print(name + "\t" + item.select('td')[1].text)
             #usd_rate.markdown(name + "\t" + item.select('td')[1].text)
