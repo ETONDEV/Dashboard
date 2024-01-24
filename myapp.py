@@ -172,6 +172,7 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         remaining_time_formatted = extract_time(remaining_time)
         xx_time_zone.markdown(f"[Openned]")
         if "Seoul" in str(market_tz):
+            kor_market_open_flag = 1
             stock_test.markdown("오픈")
         #else:
         #    stock_test.markdown(market_tz)
@@ -182,6 +183,7 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         remaining_time_formatted = extract_time(remaining_time)
         xx_time_zone.markdown(f"[Closed]")
         if "Seoul" in str(market_tz):
+            kor_market_open_flag = 0
             stock_test.markdown("닫음1")
         #else:
         #    stock_test.markdown(market_tz)            
@@ -192,6 +194,7 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         remaining_time_formatted = extract_time(remaining_time)
         xx_time_zone.markdown(f"[Closed]")
         if "Seoul" in str(market_tz):
+            kor_market_open_flag = 0
             stock_test.markdown("닫음2")
         #else:
         #    stock_test.markdown(market_tz)            
@@ -307,9 +310,9 @@ counter = 0
 while True:
     update_clock()
     update_coin_data()
-    #장오픈중일때만 if 추가
-    #if counter % 10 == 0:
-    #    update_stock_data()
-    #    counter = 0
+    장오픈중일때만 if 추가
+    if counter % 10 == 0 and kor_market_open_flag == 1:
+        update_stock_data()
+        counter = 0
     time.sleep(1)
     counter += 1
