@@ -154,7 +154,7 @@ def extract_time(remaining_time):
 def market_status(current_utc, market_tz, market_open, market_close, xx_time_zone):
     market_time = current_utc.astimezone(market_tz)
 
-    stock_test.markdown(market_tz)
+    
     
     if not is_weekday(market_time):
         return "Closed - Opens on next weekday"
@@ -171,20 +171,24 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         remaining_time = market_close_dt - market_time
         remaining_time_formatted = extract_time(remaining_time)
         xx_time_zone.markdown(f"[Openned]")
-        #if xx_time_zone == :
-        #    kor_market_open_flag = 1
+        if xx_time_zone == "Asia/Seoul":
+            stock_test.markdown("오픈")
         return f"**Closes** : in {str(remaining_time_formatted)}"
         
     elif market_time < market_open_dt:
         remaining_time = market_open_dt - market_time
         remaining_time_formatted = extract_time(remaining_time)
         xx_time_zone.markdown(f"[Closed]")
+        if xx_time_zone == "Asia/Seoul":
+            stock_test.markdown("닫음1")
         return f"**Opens** : in {str(remaining_time_formatted)}"
     else:
         next_open_dt = (market_open_dt + datetime.timedelta(days=1)).astimezone(pytz.utc)
         remaining_time = next_open_dt - current_utc
         remaining_time_formatted = extract_time(remaining_time)
         xx_time_zone.markdown(f"[Closed]")
+        if xx_time_zone == "Asia/Seoul":
+            stock_test.markdown("닫음2")
         return f"**Opens** : in {str(remaining_time_formatted)}"
 
 def is_weekday(dt):
