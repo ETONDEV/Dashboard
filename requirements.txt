@@ -1,2 +1,4 @@
 pytz
 streamlit-antd-components
+beautifulsoup4
+urllib3
