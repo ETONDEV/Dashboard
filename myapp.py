@@ -6,9 +6,15 @@ import streamlit_antd_components as sac
 import requests
 import pandas as pd
 
+#주식관련
+#import requests
+import bs4 as bs
+import urllib3
+import ast
+
 #======================def START=========================
 #===========Upbit START=============
-#종목리스트 가져오기
+#코인 리스트 가져오기
 def get_tickers():
     url = "https://api.upbit.com/v1/market/all"
     headers = {"accept": "application/json"}
@@ -20,7 +26,7 @@ def get_tickers():
             tickers.append(market['market'])
     return tickers
 
-#종목 현재가 가져오기
+#코인 현재가 가져오기
 def get_ticker_price(market):
     url = f"https://api.upbit.com/v1/ticker?markets={market}"
     headers = {"accept": "application/json"}
@@ -28,7 +34,7 @@ def get_ticker_price(market):
     data = response.json()
     return data
 
-#종목 오더북 가져오기
+#코인 오더북 가져오기
 def get_order_price(market):
     url = f"https://api.upbit.com/v1/orderbook?markets={market}"
     headers = {"accept": "application/json"}
@@ -84,6 +90,38 @@ def update_coin_data():
     coin_dataframe.dataframe(coin_df_sorted) 
     
 #===========Upbit END=============
+
+
+#===========Stock START=============
+# 1. 종목 데이터 가져오기
+def get_all_info(company_code):
+    html = connect_finance_page(company_code)
+    current_info = html.find("dl", {"class": "blind"})
+    current_info = change_info_format(current_info.find_all("dd"))  # dict 형태로 변경
+    return current_info
+
+# 1-1. url 연결
+def connect_finance_page(company_code):
+    url = "https://finance.naver.com/item/main.nhn?code=" + company_code
+    resp = requests.get(url)
+    soup = bs.BeautifulSoup(resp.text, "html.parser")
+    return soup
+
+# 1-2. 종목 데이터 리스트 -> 사전 형태로 변경
+def change_info_format(current_info):
+    info_dictionary = {"Date": current_info[0].get_text()}
+    current_info.remove(current_info[0])
+    for i, item in enumerate(current_info):
+        current_info[i] = item.get_text().split()
+    for i, item in enumerate(current_info):
+        info_dictionary[item[0]] = item[1]
+    return info_dictionary
+
+#주식 메인 표
+#def update_stock_data():
+    
+
+#===========Stock END=============
 def extract_time(remaining_time):
     # Extract hours, minutes, and seconds from the timedelta object
     hours, remainder = divmod(remaining_time.seconds, 3600)
@@ -193,6 +231,7 @@ with tab1:
     #st.header("Main")
     #coin_selected = st.empty()
     coin_dataframe = st.empty()
+    stock_test = st.empty()
 with tab2:
     coin_array = sac.transfer(items=all_coin_list, label='label', index=indices, titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)
     coin_array_noKRW = [coin.replace('KRW-', '') for coin in coin_array]
