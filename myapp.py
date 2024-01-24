@@ -119,20 +119,29 @@ def change_info_format(current_info):
 
 #주식 메인 표
 def update_stock_data():
-    global info
+    global stock_data
     #global stock_array
     stock_input = "005930, 035720, 035420" #★★★★★★★★★★★★★종목입력★★★★★★★★★★★★★
     stock_input_tmp = stock_input.replace(" ", "")
     stock_array = stock_input_tmp.split(",") #string to Array
     stock_number = len(stock_array)    
 
-    for code in stock_array:
-        #info = get_all_info(code)        
-        info.append(get_all_info(code))
-    #stock_test.write(info)
-    stock_test.text_input("output", info)
-    stock_test2.text_input("output", info[0]['종목명'])
+    for code in stock_array:    
+        stock_data.append(get_all_info(code))
+
+    st_trade_price = []
     
+    #현재가
+    st_trade_name = [stock_data[i]['종목명'] for i in range(stock_number)]
+    st_trade_price = [stock_data[i]['현재가'] for i in range(stock_number)]
+    
+    stock_test.text_input("output", stock_data)
+    stock_test2.text_input("output", stock_data[0]['종목명'])
+
+    #Dataframe 뿌려주기(초기값)
+    stock_df = pd.DataFrame({'Name': st_trade_name, 'Price': st_trade_price})
+    stock_df_sorted = info.sort_values(by=['Price'], ascending=False)
+    stock_dataframe.dataframe(stock_df_sorted) 
 
 #===========Stock END=============
 def extract_time(remaining_time):
@@ -232,7 +241,7 @@ all_coin_list = []
 all_coin_list = get_tickers()
 
 # 주식 관련
-info = []
+stock_data = []
 
 # 초기 코인선택 대상 설정
 text_values = ["KRW-BTC", "KRW-ETH", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-ETC", "KRW-SAND", "KRW-XEC"]
@@ -243,6 +252,7 @@ with tab1:
     #st.header("Main")
     #coin_selected = st.empty()
     coin_dataframe = st.empty()
+    stock_dataframe = st.empty()
     stock_test = st.empty()
     stock_test2 = st.empty()
 with tab2:
