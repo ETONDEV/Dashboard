@@ -38,9 +38,10 @@ def get_order_price(market):
 
 #코인 메인 표
 def update_coin_data():
-    global coin_array, trade_price, coin_string, coin_number, coin_array_noKRW, signed_change_rate, signed_change_price
+    global coin_array, trade_price, coin_string, coin_number, coin_array_noKRW, signed_change_rate, signed_change_price, up_down
     coin_data = get_ticker_price(coin_string) #선택된 코인 data 가져오기
-
+    coin_orderbook = get_order_price(coin_string)
+    
     #코인 data 가공
     #현재가
     trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)]
@@ -52,8 +53,19 @@ def update_coin_data():
     change_symbols = {"FALL": "▽", "EVEN": "〓", "RISE": "▲"}
     up_down = [change_symbols.get(coin_data[m]['change'], "") for m in range(coin_number)]
 
+    for j in range(coin_number):
+    ask_tmp = 0
+    bid_tmp = 0
+    for i in range(0,15):
+        units = coin_orderbook[j]['orderbook_units']
+        ask_tmp = ask_tmp + units[i]['ask_size']*units[i]['ask_price']
+        bid_tmp = bid_tmp + units[i]['bid_size']*units[i]['bid_price']
+        if i == 14:
+            sum_ask_size.append(int(ask_tmp))
+            sum_bid_size.append(int(bid_tmp))  
+                
     #Dataframe 뿌려주기(초기값)
-    coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price(￦)': trade_price, 'Trend': up_down, 'Change(%)': signed_change_rate, 'Change(￦)': signed_change_price})
+    coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price(￦)': trade_price, 'Trend': up_down, 'Change(%)': signed_change_rate, 'Change(￦)': signed_change_price, 'Ask': sum_ask_size, 'Bid': sum_bid_size}})
     coin_df_sorted = coin_df.sort_values(by=['Price(￦)'], ascending=False)
     coin_dataframe.dataframe(coin_df_sorted) 
     
@@ -155,6 +167,8 @@ trade_price = [] #현재가
 up_down = [] #전일대비 업다운
 signed_change_rate = [] #전일대비 퍼센트
 signed_change_price = [] #전일대비 금액
+sum_ask_size = []
+sum_bid_size = []
 
 all_coin_list = []
 
