@@ -149,6 +149,15 @@ with tab2:
     coin_array_noKRW = [coin.replace('KRW-', '') for coin in coin_array]
     coin_number = len(coin_array)
     coin_string = ','.join(coin_array)    
+
+    update_coin_data() #코인 표 만들기
+    
+with tab3:
+    st.header("An owl")
+   #st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
+
+def update_coin_data():
+    global coin_array, trade_price, coin_string, coin_number, coin_array_noKRW, signed_change_rate, signed_change_price
     coin_data = get_ticker_price(coin_string) #선택된 코인 data 가져오기
 
     #코인 data 가공
@@ -164,21 +173,10 @@ with tab2:
 
     #Dataframe 뿌려주기(초기값)
     coin_df = pd.DataFrame({'Name': coin_array_noKRW, '↕': up_down, 'Price': trade_price, 'change(%)': signed_change_rate, 'change(KRW)': signed_change_price})
-    coin_dataframe.dataframe(coin_df)
+    coin_dataframe.dataframe(coin_df) 
     
-with tab3:
-    st.header("An owl")
-   #st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
-    
-def update_coin_data():
-    global coin_array, trade_price, coin_string, coin_number, coin_array_noKRW, signed_change_rate, signed_change_price
-    coin_data = get_ticker_price(coin_string)
-    
-    trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)] #현재가
-    signed_change_rate = ["{0:6.2f}%".format(float(coin_data[i]['signed_change_rate']*100)) for i in range(coin_number)] #전일대비 퍼센트
-    signed_change_price = [coin_data[i]['signed_change_price'] for i in range(coin_number)] #전일대비 금액    
-    
-    coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price, 'change(%)': signed_change_rate, 'change(KRW)': signed_change_price})
+    #Dataframe 뿌려주기(초기값)
+    coin_df = pd.DataFrame({'Name': coin_array_noKRW, '↕': up_down, 'Price': trade_price, 'change(%)': signed_change_rate, 'change(KRW)': signed_change_price})
     coin_dataframe.dataframe(coin_df)
     
 def update_clock():
