@@ -118,8 +118,16 @@ def change_info_format(current_info):
     return info_dictionary
 
 #주식 메인 표
-#def update_stock_data():
-    
+def update_stock_data():
+    #global stock_array
+    stock_input = "005930, 035720, 035420" #★★★★★★★★★★★★★종목입력★★★★★★★★★★★★★
+    stock_input_tmp = stock_input.replace(" ", "")
+    stock_array = stock_input_tmp.split(",") #string to Array
+    stock_number = len(stock_array)    
+
+    for code in stock_array:
+        info = get_all_info(code)
+    stock_test.write(info)
 
 #===========Stock END=============
 def extract_time(remaining_time):
@@ -237,7 +245,10 @@ with tab2:
     coin_array_noKRW = [coin.replace('KRW-', '') for coin in coin_array]
     coin_number = len(coin_array)
     coin_string = ','.join(coin_array)    
-    update_coin_data() #코인 표 만들기    
+    update_coin_data() #코인 표 만들기
+    update_stock_data()
+    
+    #stock_test.write
 with tab3:
     st.header("An owl")
    #st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
