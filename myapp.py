@@ -211,6 +211,7 @@ def exchange_rate():
 
     exchange_rate_array = []
     # 출력하고자 하는 국가 정보를 리스트로 정의
+    rates = {}
     desired_countries = ["미국 USD", "유럽연합 EUR", "일본 JPY (100엔)", "아랍에미리트 AED"]
 
     for item in items:
@@ -221,7 +222,7 @@ def exchange_rate():
     #usd_rate.markdown(exchange_rate_array)
 
     #Dataframe 뿌려주기(초기값)
-    ex_rate_df = pd.DataFrame({'Name': desired_countries, 'Price': exchange_rate_array})
+    ex_rate_df = pd.DataFrame([rates])
     ex_rate_dataframe.dataframe(ex_rate_df)
             #print(name + "\t" + item.select('td')[1].text)
             #usd_rate.markdown(name + "\t" + item.select('td')[1].text)
