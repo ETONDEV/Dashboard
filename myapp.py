@@ -112,9 +112,9 @@ def change_info_format(current_info):
     info_dictionary = {"Date": current_info[0].get_text()}
     current_info.remove(current_info[0])
     for i, item in enumerate(current_info):
-        current_info[i] = item.get_text().split()
-    for i, item in enumerate(current_info):
-        info_dictionary[item[0]] = item[1]
+        # 첫 번째 공백을 기준으로 분리
+        key, *value = item.get_text().split(maxsplit=1)
+        info_dictionary[key] = ' '.join(value)
     return info_dictionary
 
 #주식 메인 표
