@@ -200,13 +200,13 @@ def exchange_rate():
     address = 'https://finance.naver.com'
     addition = '/marketindex/?tabSel=exchange#tab_section'
     res = requests.get(address + addition)
-    soup = BeautifulSoup(res.content, 'html.parser')
+    soup = bs.BeautifulSoup(res.content, 'html.parser')
 
     frame = soup.find('iframe', id="frame_ex1")
     frameaddr = address + frame['src']
 
     res1 = requests.get(frameaddr)
-    frame_soup = BeautifulSoup(res1.content, 'html.parser')
+    frame_soup = bs.BeautifulSoup(res1.content, 'html.parser')
     items = frame_soup.select('body > div > table > tbody > tr')
 
     # 출력하고자 하는 국가 정보를 리스트로 정의
