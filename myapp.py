@@ -173,6 +173,8 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         xx_time_zone.markdown(f"[Openned]")
         if xx_time_zone == "Asia/Seoul":
             stock_test.markdown("오픈")
+        else:
+            stock_test.markdown("빠짐")
         return f"**Closes** : in {str(remaining_time_formatted)}"
         
     elif market_time < market_open_dt:
@@ -181,6 +183,8 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         xx_time_zone.markdown(f"[Closed]")
         if xx_time_zone == "Asia/Seoul":
             stock_test.markdown("닫음1")
+        else:
+            stock_test.markdown("빠짐")            
         return f"**Opens** : in {str(remaining_time_formatted)}"
     else:
         next_open_dt = (market_open_dt + datetime.timedelta(days=1)).astimezone(pytz.utc)
@@ -189,6 +193,8 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         xx_time_zone.markdown(f"[Closed]")
         if xx_time_zone == "Asia/Seoul":
             stock_test.markdown("닫음2")
+        else:
+            stock_test.markdown("빠짐")            
         return f"**Opens** : in {str(remaining_time_formatted)}"
 
 def is_weekday(dt):
