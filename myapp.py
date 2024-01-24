@@ -79,7 +79,7 @@ def update_coin_data():
         compare.append(compare_tmp)
     
     #Dataframe 뿌려주기(초기값)
-    coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price(￦)': trade_price, 'Trend': up_down, 'Change(%)': signed_change_rate, 'Change(￦)': signed_change_price, 'A/B Ratio': sum_ask_bid_rate, 'Ask': sum_ask_size, 'vs': compare, 'Bid': sum_bid_size})
+    coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price(￦)': trade_price, 'Trend': up_down, 'Change(%)': signed_change_rate, 'Change(￦)': signed_change_price, 'A/B': sum_ask_bid_rate, 'Ask': sum_ask_size, 'Cmpr': compare, 'Bid': sum_bid_size})
     coin_df_sorted = coin_df.sort_values(by=['Price(￦)'], ascending=False)
     coin_dataframe.dataframe(coin_df_sorted) 
     
