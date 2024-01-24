@@ -163,7 +163,7 @@ def update_stock_data():
             year, month, day, hour, minute, status = match.groups()
     
             # 날짜 객체 생성
-            date_obj = datetime(int(year), int(month), int(day), int(hour), int(minute))
+            date_obj = datetime.datetime(int(year), int(month), int(day), int(hour), int(minute))
     
             # 날짜와 요일을 포맷팅
             var1 = date_obj.strftime('%Y-%m-%d(%a) %H:%M')
