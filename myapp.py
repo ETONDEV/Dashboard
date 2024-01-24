@@ -157,7 +157,12 @@ signed_change_price = [] #전일대비 금액
 
 all_coin_list = []
 
+# 코인 전체목록 불러오기
 all_coin_list = get_tickers()
+
+# 초기 코인선택 대상 설정
+text_values = ["KRW-BTC", "KRW-ETH", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-ETC", "KRW-SAND", "KRW-XEC"]
+indices = [all_coin_list.index(text) for text in text_values if text in all_coin_list]
 
 tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
 with tab1:
@@ -165,7 +170,7 @@ with tab1:
     #coin_selected = st.empty()
     coin_dataframe = st.empty()
 with tab2:
-    coin_array = sac.transfer(items=all_coin_list, label='label', index=[0, 1, 2], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)
+    coin_array = sac.transfer(items=all_coin_list, label='label', index=indices, titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)
     coin_array_noKRW = [coin.replace('KRW-', '') for coin in coin_array]
     coin_number = len(coin_array)
     coin_string = ','.join(coin_array)    
