@@ -218,7 +218,11 @@ def exchange_rate():
         if name in desired_countries:
             exchange_rate_array.append(item.select('td')[1].text)
         
-    usd_rate.markdown(exchange_rate_array)
+    #usd_rate.markdown(exchange_rate_array)
+
+    #Dataframe 뿌려주기(초기값)
+    ex_rate_df = pd.DataFrame({'Name': desired_countries, 'Price': exchange_rate_array})
+    ex_rate_dataframe.dataframe(ex_rate_df)
             #print(name + "\t" + item.select('td')[1].text)
             #usd_rate.markdown(name + "\t" + item.select('td')[1].text)
 
@@ -357,6 +361,7 @@ tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
 with tab1:
     #st.header("Main")
     #coin_selected = st.empty()
+    ex_rate_dataframe = st.empty()
     coin_dataframe = st.empty()
     stock_dataframe = st.empty()
     stock_test = st.empty()
