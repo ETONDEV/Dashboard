@@ -35,6 +35,26 @@ def get_order_price(market):
     response = requests.get(url, headers=headers)
     data = response.json()
     return data
+
+#코인 메인 표
+def update_coin_data():
+    global coin_array, trade_price, coin_string, coin_number, coin_array_noKRW, signed_change_rate, signed_change_price
+    coin_data = get_ticker_price(coin_string) #선택된 코인 data 가져오기
+
+    #코인 data 가공
+    #현재가
+    trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)]
+    #전일대비 퍼센트
+    signed_change_rate = ["{0:6.2f}%".format(float(coin_data[i]['signed_change_rate']*100)) for i in range(coin_number)]
+    #전일대비 금액
+    signed_change_price = [coin_data[i]['signed_change_price'] for i in range(coin_number)]
+    #전일대비 업다운
+    change_symbols = {"FALL": "▽", "EVEN": "〓", "RISE": "▲"}
+    up_down = [change_symbols.get(coin_data[m]['change'], "") for m in range(coin_number)]
+
+    #Dataframe 뿌려주기(초기값)
+    coin_df = pd.DataFrame({'Name': coin_array_noKRW, '↕': up_down, 'Price': trade_price, 'change(%)': signed_change_rate, 'change(KRW)': signed_change_price})
+    coin_dataframe.dataframe(coin_df) 
     
 #===========Upbit END=============
 def extract_time(remaining_time):
@@ -79,24 +99,7 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
 def is_weekday(dt):
     return dt.weekday() < 5  # Monday is 0, Sunday is 6
 
-def update_coin_data():
-    global coin_array, trade_price, coin_string, coin_number, coin_array_noKRW, signed_change_rate, signed_change_price
-    coin_data = get_ticker_price(coin_string) #선택된 코인 data 가져오기
 
-    #코인 data 가공
-    #현재가
-    trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)]
-    #전일대비 퍼센트
-    signed_change_rate = ["{0:6.2f}%".format(float(coin_data[i]['signed_change_rate']*100)) for i in range(coin_number)]
-    #전일대비 금액
-    signed_change_price = [coin_data[i]['signed_change_price'] for i in range(coin_number)]
-    #전일대비 업다운
-    change_symbols = {"FALL": "▽", "EVEN": "〓", "RISE": "▲"}
-    up_down = [change_symbols.get(coin_data[m]['change'], "") for m in range(coin_number)]
-
-    #Dataframe 뿌려주기(초기값)
-    coin_df = pd.DataFrame({'Name': coin_array_noKRW, '↕': up_down, 'Price': trade_price, 'change(%)': signed_change_rate, 'change(KRW)': signed_change_price})
-    coin_dataframe.dataframe(coin_df) 
     
 #======================def END=========================
 
@@ -152,25 +155,21 @@ up_down = [] #전일대비 업다운
 signed_change_rate = [] #전일대비 퍼센트
 signed_change_price = [] #전일대비 금액
 
-
 all_coin_list = []
 
 all_coin_list = get_tickers()
 
 tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
-
 with tab1:
     #st.header("Main")
     #coin_selected = st.empty()
     coin_dataframe = st.empty()
 with tab2:
-    coin_array = sac.transfer(items=all_coin_list, label='label', index=[0, 1], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)
+    coin_array = sac.transfer(items=all_coin_list, label='label', index=[0, 1, 2], titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)
     coin_array_noKRW = [coin.replace('KRW-', '') for coin in coin_array]
     coin_number = len(coin_array)
     coin_string = ','.join(coin_array)    
-
-    update_coin_data() #코인 표 만들기
-    
+    update_coin_data() #코인 표 만들기    
 with tab3:
     st.header("An owl")
    #st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
