@@ -221,7 +221,7 @@ def exchange_rate():
 
     # 데이터프레임 생성 (가로 형태)
     ex_rate_df = pd.DataFrame([exchange_rates])
-    ex_rate_dataframe.dataframe(ex_rate_df)
+    ex_rate_dataframe.dataframe(ex_rate_df, hide_index=True, use_container_width=True)
             #print(name + "\t" + item.select('td')[1].text)
             #usd_rate.markdown(name + "\t" + item.select('td')[1].text)
 
