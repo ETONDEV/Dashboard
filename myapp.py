@@ -11,7 +11,7 @@ import pandas as pd
 import bs4 as bs
 import urllib3
 import ast
-
+import re
 #======================def START=========================
 #===========Upbit START=============
 #코인 리스트 가져오기
@@ -134,13 +134,18 @@ def update_stock_data():
     st_signed_change_price = []
     st_signed_change_rate = []
     st_up_down = []
+    st_trade_time = []
+    st_trade_time_status = []
     
     #현재가
     st_trade_name = [stock_data[i]['종목명'] for i in range(stock_number)]
     st_trade_price = [int(stock_data[i]['현재가'].replace(',', '')) for i in range(stock_number)]
     st_signed_change_price = [int(stock_data[i]['현재가'].replace(',', '')) - int(stock_data[i]['전일가'].replace(',', '')) for i in range(stock_number)]
     st_signed_change_rate = ["{:.2f}%".format((float(stock_data[i]['현재가'].replace(',', '')) - float(stock_data[i]['전일가'].replace(',', '')))/float(stock_data[i]['전일가'].replace(',', '')) * 100) for i in range(stock_number)]
+    
+    #for문 같이 씀
     for i in range(stock_number):
+        #업 다운
         if st_signed_change_price[i] > 0:
             st_up_down_tmp = "▲"
         elif st_signed_change_price[i] < 0:
@@ -148,6 +153,26 @@ def update_stock_data():
         else:
             st_up_down_tmp = "〓"
         st_up_down.append(st_up_down_tmp)
+        
+        #거래시간
+        # stock_number 만큼 반복
+        data = stock_data[i]['Date']
+        # 정규 표현식을 사용하여 날짜와 시간, 상태 추출
+        match = re.search(r'(\d{4})년 (\d{2})월 (\d{2})일 (\d{2})시 (\d{2})분 기준 (\S+)', data)
+        if match:
+            year, month, day, hour, minute, status = match.groups()
+    
+            # 날짜 객체 생성
+            date_obj = datetime(int(year), int(month), int(day), int(hour), int(minute))
+    
+            # 날짜와 요일을 포맷팅
+            var1 = date_obj.strftime('%Y-%m-%d(%a) %H:%M')
+            var2 = status
+    
+            # 추출한 값을 리스트에 추가
+            st_trade_time.append(var1)
+            st_trade_status.append(var2)
+            
         
     #change_symbols = {"FALL": "▽", "EVEN": "〓", "RISE": "▲"}
     #up_down = [change_symbols.get(coin_data[m]['change'], "") for m in range(coin_number)]    
@@ -158,7 +183,7 @@ def update_stock_data():
     #stock_test2.text_input("output", stock_data[0]['종목명'])
 
     #Dataframe 뿌려주기(초기값)
-    stock_df = pd.DataFrame({'Name': st_trade_name, 'Price': st_trade_price, 'Trd': st_up_down, '%': st_signed_change_rate, 'Change': st_signed_change_price})
+    stock_df = pd.DataFrame({'Name': st_trade_name, 'Price': st_trade_price, 'Trd': st_up_down, '%': st_signed_change_rate, 'Change': st_signed_change_price, 'Tr. Time': st_trade_time, 'Status': st_trade_status})
     stock_df_sorted = stock_df.sort_values(by=['Price'], ascending=False)
     stock_dataframe.dataframe(stock_df_sorted)
 
