@@ -131,6 +131,8 @@ def update_stock_data():
         info.append(get_all_info(code))
     #stock_test.write(info)
     stock_test.text_input("output", info)
+    stock_test2.text_input("output", info[0]['종목명'])
+    
 
 #===========Stock END=============
 def extract_time(remaining_time):
@@ -242,6 +244,7 @@ with tab1:
     #coin_selected = st.empty()
     coin_dataframe = st.empty()
     stock_test = st.empty()
+    stock_test2 = st.empty()
 with tab2:
     coin_array = sac.transfer(items=all_coin_list, label='label', index=indices, titles=['source', 'target'], reload='reload data', color='dark', search=True, pagination=True, use_container_width=True)
     coin_array_noKRW = [coin.replace('KRW-', '') for coin in coin_array]
