@@ -140,7 +140,7 @@ def update_stock_data():
 
     #Dataframe 뿌려주기(초기값)
     stock_df = pd.DataFrame({'Name': st_trade_name, 'Price': st_trade_price})
-    stock_df_sorted = info.sort_values(by=['Price'], ascending=False)
+    stock_df_sorted = stock_df.sort_values(by=['Price'], ascending=False)
     stock_dataframe.dataframe(stock_df_sorted) 
 
 #===========Stock END=============
