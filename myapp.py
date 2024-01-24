@@ -154,7 +154,7 @@ def extract_time(remaining_time):
 def market_status(current_utc, market_tz, market_open, market_close, xx_time_zone):
     market_time = current_utc.astimezone(market_tz)
 
-    stock_test.markdown(market_tz)
+    stock_test.markdown(xx_time_zone)
     
     if not is_weekday(market_time):
         return "Closed - Opens on next weekday"
