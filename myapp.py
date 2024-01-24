@@ -364,6 +364,7 @@ with tab2:
     coin_string = ','.join(coin_array)    
     update_coin_data() #코인 표 만들기
     update_stock_data()
+    exchange_rate()
     
     #stock_test.write
 with tab3:
