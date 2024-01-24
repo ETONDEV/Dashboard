@@ -112,12 +112,15 @@ def change_info_format(current_info):
     info_dictionary = {"Date": current_info[0].get_text()}
     current_info.remove(current_info[0])
     for item in current_info:
-        # 첫 번째 공백을 기준으로 분리
-        key, *value = item.get_text().split(maxsplit=1)
-        if key == '종목명':
-            info_dictionary[key] = ' '.join(value)  # 종목명의 경우, 공백 포함 전체 문자열 저장
+        text = item.get_text()
+        # '종목명'에 해당하는 경우, 전체 문자열을 저장
+        if '종목명' in text:
+            info_dictionary['종목명'] = text.replace('종목명', '').strip()
         else:
-            info_dictionary[key] = value[0] if value else ''  # 그 외 항목은 첫 번째 값만 저장
+            # 다른 항목들에 대해서는 원래 코드를 유지
+            split_text = text.split()
+            if len(split_text) > 1:
+                info_dictionary[split_text[0]] = split_text[1]
     return info_dictionary
 
 #주식 메인 표
