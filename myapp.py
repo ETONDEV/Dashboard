@@ -292,4 +292,6 @@ def update_clock():
 while True:
     update_clock()
     update_coin_data()
+    #장오픈중일때만 if 추가
+    update_stock_data()
     time.sleep(1)
