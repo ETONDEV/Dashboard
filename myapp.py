@@ -194,6 +194,30 @@ def update_stock_data():
     stock_dataframe.dataframe(stock_df_sorted)
 
 #===========Stock END=============
+
+#===========환율 START=============
+def exchange_rate():
+    address = 'https://finance.naver.com'
+    addition = '/marketindex/?tabSel=exchange#tab_section'
+    res = requests.get(address + addition)
+    soup = BeautifulSoup(res.content, 'html.parser')
+
+    frame = soup.find('iframe', id="frame_ex1")
+    frameaddr = address + frame['src']
+
+    res1 = requests.get(frameaddr)
+    frame_soup = BeautifulSoup(res1.content, 'html.parser')
+    items = frame_soup.select('body > div > table > tbody > tr')
+
+    # 출력하고자 하는 국가 정보를 리스트로 정의
+    desired_countries = ["미국 USD", "유럽연합 EUR", "일본 JPY (100엔)", "아랍에미리트 AED"]
+
+    for item in items:
+        name = item.select('td')[0].text.replace("\n", "").replace("\t", "")
+        if name in desired_countries:
+            print(name + "\t" + item.select('td')[1].text)
+
+#===========환율 END=============
 def extract_time(remaining_time):
     # Extract hours, minutes, and seconds from the timedelta object
     hours, remainder = divmod(remaining_time.seconds, 3600)
@@ -299,6 +323,16 @@ with col4:
     "US Market:"
     us_time_zone = st.empty()
     stock2_container = st.empty()
+
+f_col1, f_col2, f_col3, f_col4 = st.columns(4)
+with f_col1:
+    usd_rate = st.empty()
+with f_col2:
+    eur_rate = st.empty()
+with f_col3:
+    aed_rate = st.empty()
+with f_col4:
+    jpy_rate = st.empty()
 
 # 코인 전체목록 불러오기
 coin_array = []
