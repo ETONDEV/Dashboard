@@ -53,7 +53,7 @@ def update_coin_data():
     up_down = [change_symbols.get(coin_data[m]['change'], "") for m in range(coin_number)]
 
     #Dataframe 뿌려주기(초기값)
-    coin_df = pd.DataFrame({'Name': coin_array_noKRW, '↕': up_down, 'Price(￦)': trade_price, 'change(%)': signed_change_rate, 'change(￦)': signed_change_price})
+    coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price(￦)': trade_price, 'status': up_down, 'change(%)': signed_change_rate, 'change(￦)': signed_change_price})
     coin_df_sorted = coin_df.sort_values(by=['Price(￦)'], ascending=False)
     coin_dataframe.dataframe(coin_df_sorted) 
     
