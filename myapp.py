@@ -133,21 +133,30 @@ def update_stock_data():
     st_trade_price = []
     st_signed_change_price = []
     st_signed_change_rate = []
+    st_up_down = []
     
     #현재가
     st_trade_name = [stock_data[i]['종목명'] for i in range(stock_number)]
     st_trade_price = [int(stock_data[i]['현재가'].replace(',', '')) for i in range(stock_number)]
     st_signed_change_price = [int(stock_data[i]['현재가'].replace(',', '')) - int(stock_data[i]['전일가'].replace(',', '')) for i in range(stock_number)]
-    #st_signed_change_rate = [(float(stock_data[i]['현재가'].replace(',', '')) - float(stock_data[i]['전일가'].replace(',', '')))/float(stock_data[i]['전일가'].replace(',', '')) for i in range(stock_number)]
     st_signed_change_rate = ["{:.2f}%".format((float(stock_data[i]['현재가'].replace(',', '')) - float(stock_data[i]['전일가'].replace(',', '')))/float(stock_data[i]['전일가'].replace(',', '')) * 100) for i in range(stock_number)]
-
+    for i in range(stock_number):
+        if st_trade_price[i] > 0:
+            st_up_down = "▲"
+        elif st_trade_price[i] < 0:
+            st_up_down = "▽"
+        else:
+            st_up_down = "〓"
+    #change_symbols = {"FALL": "▽", "EVEN": "〓", "RISE": "▲"}
+    #up_down = [change_symbols.get(coin_data[m]['change'], "") for m in range(coin_number)]    
+    #st_signed_change_rate = [(float(stock_data[i]['현재가'].replace(',', '')) - float(stock_data[i]['전일가'].replace(',', '')))/float(stock_data[i]['전일가'].replace(',', '')) for i in range(stock_number)]
     #coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price, 'Trd': up_down, '%': signed_change_rate, 'Change': signed_change_price, 'A/B': sum_ask_bid_rate, 'Ask': sum_ask_size, 'Cmpr': compare, 'Bid': sum_bid_size})
     
     #stock_test.text_input("output", stock_data)
     #stock_test2.text_input("output", stock_data[0]['종목명'])
 
     #Dataframe 뿌려주기(초기값)
-    stock_df = pd.DataFrame({'Name': st_trade_name, 'Price': st_trade_price, '%': st_signed_change_rate, 'Change': st_signed_change_price})
+    stock_df = pd.DataFrame({'Name': st_trade_name, 'Price': st_trade_price, 'Trd': st_up_down, '%': st_signed_change_rate, 'Change': st_signed_change_price})
     stock_df_sorted = stock_df.sort_values(by=['Price'], ascending=False)
     stock_dataframe.dataframe(stock_df_sorted)
 
