@@ -221,21 +221,7 @@ def exchange_rate():
 
     # 데이터프레임 생성 (가로 형태)
     ex_rate_df = pd.DataFrame([exchange_rates])
-    #ex_rate_dataframe.dataframe(ex_rate_df, hide_index=True, use_container_width=True)
-        # Convert DataFrame to HTML and style it
-    st.markdown(ex_rate_df.to_html(index=False, classes='table table-striped'), unsafe_allow_html=True)
-    st.markdown("""
-        <style>
-            .table {
-                width: 100%;
-                text-align: center;
-            }
-            .table td, .table th {
-                equal-width: true;
-                text-align: center;
-            }
-        </style>
-        """, unsafe_allow_html=True)
+    ex_rate_dataframe.dataframe(ex_rate_df, hide_index=True, use_container_width=True)
 
 #===========환율 END=============
 def extract_time(remaining_time):
