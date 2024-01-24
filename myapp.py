@@ -129,11 +129,16 @@ def update_stock_data():
     for code in stock_array:    
         stock_data.append(get_all_info(code))
 
+    st_trade_name = []
     st_trade_price = []
+    st_trade_trd = []
     
     #현재가
     st_trade_name = [stock_data[i]['종목명'] for i in range(stock_number)]
-    st_trade_price = [stock_data[i]['현재가'] for i in range(stock_number)]
+    st_trade_price = [int(stock_data[i]['현재가']) for i in range(stock_number)]
+    st_trade_trd = [stock_data[i]['현재가'] - stock_data[i]['전일가'] for i in range(stock_number)]
+    
+
     
     #stock_test.text_input("output", stock_data)
     #stock_test2.text_input("output", stock_data[0]['종목명'])
@@ -141,7 +146,7 @@ def update_stock_data():
     #Dataframe 뿌려주기(초기값)
     stock_df = pd.DataFrame({'Name': st_trade_name, 'Price': st_trade_price})
     stock_df_sorted = stock_df.sort_values(by=['Price'], ascending=False)
-    stock_dataframe.dataframe(stock_df_sorted) 
+    stock_dataframe.dataframe(stock_df_sorted)
 
 #===========Stock END=============
 def extract_time(remaining_time):
