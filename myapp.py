@@ -60,17 +60,7 @@ def update_coin_data():
     #전일대비 업다운
     change_symbols = {"FALL": "▽", "EVEN": "〓", "RISE": "▲"}
     up_down = [change_symbols.get(coin_data[m]['change'], "") for m in range(coin_number)]
-
-    #for j in range(coin_number):
-    #    ask_tmp = 0
-    #    bid_tmp = 0
-    #    for i in range(0,15):
-    #        units = coin_orderbook[j]['orderbook_units']
-    #        ask_tmp = ask_tmp + units[i]['ask_size']*units[i]['ask_price']
-    #        bid_tmp = bid_tmp + units[i]['bid_size']*units[i]['bid_price']
-    #        if i == 14:
-    #            sum_ask_size.append(int(ask_tmp))
-    #            sum_bid_size.append(int(bid_tmp))  
+    #매수/매도값 산
     for j in range(coin_number):
         units = coin_orderbook[j]['orderbook_units']
         sum_ask_size.append(int(sum(u['ask_size'] * u['ask_price'] for u in units[:15])))
@@ -142,7 +132,7 @@ us_market_close = datetime.time(16, 0, 0)  # 4:00 PM ET
 #======================var END=========================
 
 st.set_page_config(page_title="●●Etonboard●●")
-st.title("Live Clock")
+#st.title("Live Clock")
 
 # Create a list of time zones with their labels
 time_zones = ['Asia/Dubai', 'Asia/Seoul', 'America/Chicago']
