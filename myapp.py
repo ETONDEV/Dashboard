@@ -180,7 +180,7 @@ us_market_close = datetime.time(16, 0, 0)  # 4:00 PM ET
 
 #======================var END=========================
 
-st.set_page_config(page_title="●●Etonboard●●")
+st.set_page_config(page_title="♣Etonboard♣")
 #st.title("Live Clock")
 
 # Create a list of time zones with their labels
