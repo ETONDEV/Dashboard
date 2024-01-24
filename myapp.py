@@ -54,15 +54,15 @@ def update_coin_data():
     up_down = [change_symbols.get(coin_data[m]['change'], "") for m in range(coin_number)]
 
     for j in range(coin_number):
-    ask_tmp = 0
-    bid_tmp = 0
-    for i in range(0,15):
-        units = coin_orderbook[j]['orderbook_units']
-        ask_tmp = ask_tmp + units[i]['ask_size']*units[i]['ask_price']
-        bid_tmp = bid_tmp + units[i]['bid_size']*units[i]['bid_price']
-        if i == 14:
-            sum_ask_size.append(int(ask_tmp))
-            sum_bid_size.append(int(bid_tmp))  
+        ask_tmp = 0
+        bid_tmp = 0
+        for i in range(0,15):
+            units = coin_orderbook[j]['orderbook_units']
+            ask_tmp = ask_tmp + units[i]['ask_size']*units[i]['ask_price']
+            bid_tmp = bid_tmp + units[i]['bid_size']*units[i]['bid_price']
+            if i == 14:
+                sum_ask_size.append(int(ask_tmp))
+                sum_bid_size.append(int(bid_tmp))  
                 
     #Dataframe 뿌려주기(초기값)
     coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price(￦)': trade_price, 'Trend': up_down, 'Change(%)': signed_change_rate, 'Change(￦)': signed_change_price, 'Ask': sum_ask_size, 'Bid': sum_bid_size}})
