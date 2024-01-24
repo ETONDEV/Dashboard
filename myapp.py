@@ -209,14 +209,18 @@ def exchange_rate():
     frame_soup = bs.BeautifulSoup(res1.content, 'html.parser')
     items = frame_soup.select('body > div > table > tbody > tr')
 
+    exchange_rate_array = []
     # 출력하고자 하는 국가 정보를 리스트로 정의
     desired_countries = ["미국 USD", "유럽연합 EUR", "일본 JPY (100엔)", "아랍에미리트 AED"]
 
     for item in items:
         name = item.select('td')[0].text.replace("\n", "").replace("\t", "")
         if name in desired_countries:
+            exchange_rate_array.append(item.select('td')[1].text)
+        
+    usd_rate.markdown(exchange_rate_array)
             #print(name + "\t" + item.select('td')[1].text)
-            usd_rate.markdown(name + "\t" + item.select('td')[1].text)
+            #usd_rate.markdown(name + "\t" + item.select('td')[1].text)
 
 #===========환율 END=============
 def extract_time(remaining_time):
