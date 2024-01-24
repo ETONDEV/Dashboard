@@ -310,7 +310,7 @@ counter = 0
 while True:
     update_clock()
     update_coin_data()
-    장오픈중일때만 if 추가
+    #장오픈중일때만 if 추가
     if counter % 10 == 0 and kor_market_open_flag == 1:
         update_stock_data()
         counter = 0
