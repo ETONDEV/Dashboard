@@ -54,7 +54,8 @@ def update_coin_data():
 
     #Dataframe 뿌려주기(초기값)
     coin_df = pd.DataFrame({'Name': coin_array_noKRW, '↕': up_down, 'Price(￦)': trade_price, 'change(%)': signed_change_rate, 'change(￦)': signed_change_price})
-    coin_dataframe.dataframe(coin_df) 
+    coin_df_sorted = coin_df.sort_values(by=['Price(￦)'], ascending=False)
+    coin_dataframe.dataframe(coin_df_sorted) 
     
 #===========Upbit END=============
 def extract_time(remaining_time):
