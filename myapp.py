@@ -174,10 +174,8 @@ def update_coin_data():
     #Dataframe 뿌려주기(초기값)
     coin_df = pd.DataFrame({'Name': coin_array_noKRW, '↕': up_down, 'Price': trade_price, 'change(%)': signed_change_rate, 'change(KRW)': signed_change_price})
     coin_dataframe.dataframe(coin_df) 
-    
-    #Dataframe 뿌려주기(초기값)
-    coin_df = pd.DataFrame({'Name': coin_array_noKRW, '↕': up_down, 'Price': trade_price, 'change(%)': signed_change_rate, 'change(KRW)': signed_change_price})
-    coin_dataframe.dataframe(coin_df)
+  
+
     
 def update_clock():
     # Get the current time in UTC
