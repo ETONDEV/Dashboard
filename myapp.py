@@ -111,10 +111,13 @@ def connect_finance_page(company_code):
 def change_info_format(current_info):
     info_dictionary = {"Date": current_info[0].get_text()}
     current_info.remove(current_info[0])
-    for i, item in enumerate(current_info):
+    for item in current_info:
         # 첫 번째 공백을 기준으로 분리
         key, *value = item.get_text().split(maxsplit=1)
-        info_dictionary[key] = ' '.join(value)
+        if key == '종목명':
+            info_dictionary[key] = ' '.join(value)  # 종목명의 경우, 공백 포함 전체 문자열 저장
+        else:
+            info_dictionary[key] = value[0] if value else ''  # 그 외 항목은 첫 번째 값만 저장
     return info_dictionary
 
 #주식 메인 표
