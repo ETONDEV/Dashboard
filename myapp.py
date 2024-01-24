@@ -287,11 +287,15 @@ def update_clock():
     stock1_container.markdown(market_status(current_time_utc, korean_tz, korean_market_open, korean_market_close, korea_time_zone))
     stock2_container.markdown(market_status(current_time_utc, us_tz, us_market_open, us_market_close, us_time_zone))
     
-    
+
+counter = 0
 # Call the update_clock function every second
 while True:
     update_clock()
     update_coin_data()
     #장오픈중일때만 if 추가
-    update_stock_data()
+    if counter % 10 == 0:
+        update_stock_data()
+        counter = 0
     time.sleep(1)
+    counter += 1
