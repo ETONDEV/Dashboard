@@ -127,7 +127,8 @@ def update_stock_data():
     stock_number = len(stock_array)    
 
     for code in stock_array:
-        info = get_all_info(code)
+        #info = get_all_info(code)        
+        info.append(get_all_info(code))
     #stock_test.write(info)
     stock_test.text_input("output", info)
 
