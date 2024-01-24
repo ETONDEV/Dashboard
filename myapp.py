@@ -129,8 +129,10 @@ coin_string = ""
 coin_data = []
 
 trade_price = [] #현재가
+up_down = [] #전일대비 업다운
 signed_change_rate = [] #전일대비 퍼센트
 signed_change_price = [] #전일대비 금액
+
 
 all_coin_list = []
 
@@ -150,12 +152,18 @@ with tab2:
     coin_data = get_ticker_price(coin_string) #선택된 코인 data 가져오기
 
     #코인 data 가공
-    trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)] #현재가
-    signed_change_rate = ["{0:6.2f}%".format(float(coin_data[i]['signed_change_rate']*100)) for i in range(coin_number)] #전일대비 퍼센트
-    signed_change_price = [coin_data[i]['signed_change_price'] for i in range(coin_number)] #전일대비 금액
+    #현재가
+    trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)]
+    #전일대비 퍼센트
+    signed_change_rate = ["{0:6.2f}%".format(float(coin_data[i]['signed_change_rate']*100)) for i in range(coin_number)]
+    #전일대비 금액
+    signed_change_price = [coin_data[i]['signed_change_price'] for i in range(coin_number)]
+    #전일대비 업다운
+    change_symbols = {"FALL": "▽", "EVEN": "〓", "RISE": "▲"}
+    up_down = [change_symbols.get(coin_data[m]['change'], "") for m in range(coin_number)]
 
-    
-    coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price, 'change(%)': signed_change_rate, 'change(KRW)': signed_change_price})
+    #Dataframe 뿌려주기(초기값)
+    coin_df = pd.DataFrame({'Name': coin_array_noKRW, '↕': up_down, 'Price': trade_price, 'change(%)': signed_change_rate, 'change(KRW)': signed_change_price})
     coin_dataframe.dataframe(coin_df)
     
 with tab3:
