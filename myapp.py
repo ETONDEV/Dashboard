@@ -362,9 +362,11 @@ with tab2:
     coin_array_noKRW = [coin.replace('KRW-', '') for coin in coin_array]
     coin_number = len(coin_array)
     coin_string = ','.join(coin_array)    
+    
+    exchange_rate()
     update_coin_data() #코인 표 만들기
     update_stock_data()
-    exchange_rate()
+    
     
     #stock_test.write
 with tab3:
