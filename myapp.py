@@ -232,10 +232,9 @@ def extract_time(remaining_time):
     return remaining_time_formatted
 
 def market_status(current_utc, market_tz, market_open, market_close, xx_time_zone):
+    global kor_market_open_flag
     market_time = current_utc.astimezone(market_tz)
-
-    
-    
+   
     if not is_weekday(market_time):
         return "Closed - Opens on next weekday"
 
@@ -407,7 +406,7 @@ while True:
     #장오픈중일때만 if 추가
     if counter % 10 == 0:
         exchange_rate()
-        if kor_market_open_flag == "1":
+        if kor_market_open_flag == 1:
             stock_test.markdown(f"스탁 업데이트 - {kor_market_open_flag}")
             update_stock_data()
         counter = 0
