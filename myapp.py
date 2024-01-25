@@ -397,6 +397,7 @@ while True:
     update_coin_data()
     #장오픈중일때만 if 추가
     if counter % 10 == 0:
+        stock_test.markdown(f"환율 업데이트 - {kor_market_open_flag}")
         exchange_rate()
         if kor_market_open_flag == 1:
             stock_test.markdown(f"스탁 업데이트 - {kor_market_open_flag}")
