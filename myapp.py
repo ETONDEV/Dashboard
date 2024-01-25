@@ -407,7 +407,7 @@ while True:
     #장오픈중일때만 if 추가
     if counter % 10 == 0:
         exchange_rate()
-        if kor_market_open_flag == 1:
+        if kor_market_open_flag == "1":
             stock_test.markdown(f"스탁 업데이트 - {kor_market_open_flag}")
             update_stock_data()
         counter = 0
