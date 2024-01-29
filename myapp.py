@@ -322,15 +322,6 @@ with col4:
     us_time_zone = st.empty()
     stock2_container = st.empty()
 
-f_col1, f_col2, f_col3, f_col4 = st.columns(4)
-with f_col1:
-    usd_rate = st.empty()
-with f_col2:
-    eur_rate = st.empty()
-with f_col3:
-    aed_rate = st.empty()
-with f_col4:
-    jpy_rate = st.empty()
 
 # 코인 전체목록 불러오기
 coin_array = []
