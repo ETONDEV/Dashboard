@@ -245,7 +245,7 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         xx_time_zone.markdown(f"[Openned]")
         if "Seoul" in str(market_tz):
             kor_market_open_flag = 1
-            stock_test.markdown(f"오픈 - {kor_market_open_flag}")
+            stock_test.markdown(f"코인 업데이트 중({kor_market_open_flag})")
         #else:
         #    stock_test.markdown(market_tz)
         return f"**Closes** : in {str(remaining_time_formatted)}"
@@ -256,7 +256,7 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         xx_time_zone.markdown(f"[Closed]")
         if "Seoul" in str(market_tz):
             kor_market_open_flag = 0
-            stock_test.markdown(f"닫음1 - {kor_market_open_flag}")
+            stock_test.markdown(f"주식 Skip({kor_market_open_flag})")
         #else:
         #    stock_test.markdown(market_tz)            
         return f"**Opens** : in {str(remaining_time_formatted)}"
@@ -267,7 +267,7 @@ def market_status(current_utc, market_tz, market_open, market_close, xx_time_zon
         xx_time_zone.markdown(f"[Closed]")
         if "Seoul" in str(market_tz):
             kor_market_open_flag = 0
-            stock_test.markdown(f"닫음2 - {kor_market_open_flag}")
+            stock_test.markdown(f"주식 Skip({kor_market_open_flag})")
         #else:
         #    stock_test.markdown(market_tz)            
         return f"**Opens** : in {str(remaining_time_formatted)}"
@@ -322,7 +322,6 @@ with col4:
     us_time_zone = st.empty()
     stock2_container = st.empty()
 
-
 # 코인 전체목록 불러오기
 coin_array = []
 coin_string = ""
@@ -330,16 +329,12 @@ coin_data = []
 all_coin_list = []
 all_coin_list = get_tickers()
 
-
-
 # 초기 코인선택 대상 설정
 text_values = ["KRW-BTC", "KRW-ETH", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-ETC", "KRW-SAND", "KRW-XEC"]
 indices = [all_coin_list.index(text) for text in text_values if text in all_coin_list]
 
 tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
 with tab1:
-    #st.header("Main")
-    #coin_selected = st.empty()
     ex_rate_dataframe = st.empty()
     coin_dataframe = st.empty()
     stock_dataframe = st.empty()
@@ -350,16 +345,11 @@ with tab2:
     coin_array_noKRW = [coin.replace('KRW-', '') for coin in coin_array]
     coin_number = len(coin_array)
     coin_string = ','.join(coin_array)    
-    
     exchange_rate()
     update_coin_data() #코인 표 만들기
     update_stock_data()
-    
-    
-    #stock_test.write
 with tab3:
     st.header("An owl")
-   #st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
 
 
   
@@ -388,10 +378,10 @@ while True:
     update_coin_data()
     #장오픈중일때만 if 추가
     if counter % 10 == 0:
-        stock_test.markdown(f"환율 업데이트 - {kor_market_open_flag}")
+        stock_test.markdown(f"환율 업데이트 중({kor_market_open_flag})")
         exchange_rate()
         if kor_market_open_flag == 1:
-            stock_test.markdown(f"스탁 업데이트 - {kor_market_open_flag}")
+            stock_test.markdown(f"주식 업데이트 중({kor_market_open_flag})")
             update_stock_data()
         counter = 0
     time.sleep(1)
