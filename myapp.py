@@ -378,9 +378,9 @@ with tab3:
         # Display total
         purchased_total2 = st.text_input("Purchased Total:", value=total2, disabled=True, key="purchased_total2")
         # for w_col3
-        final_number = purchased_price1 + purchased_price2
-        final_total = purchased_total1 + purchased_total2
-        final_price = final_total/final_number
+        final_number = float(purchased_price1) + float(purchased_price2)
+        final_total = float(purchased_total1) + float(purchased_total2)
+        final_price = float(final_total)/float(final_number)
     with w_col3:
         # Text inputs
         purchased_price3 = st.text_input("Enter purchased price:", disabled=True, value=final_pricem, key="purchased_price3")
