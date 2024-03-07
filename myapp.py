@@ -359,13 +359,14 @@ with tab2:
     update_coin_data() #코인 표 만들기
     update_stock_data()
 with tab3:
-    st.header("An owl")
+    st.header("물타기 계산")
     final_number = ""
     final_total = ""
     final_price = ""
     w_col1, w_col2, w_col3, w_col4 = st.columns(4)
     with w_col1:
         # Text inputs
+        st.write("기존 매수")
         purchased_price1 = st.text_input("Enter purchased price:", key="purchased_price1")
         purchased_number1 = st.text_input("Enter purchased number:", key="purchased_number1")
         # Calculate total
@@ -374,6 +375,7 @@ with tab3:
         purchased_total1 = st.text_input("Purchased Total:", value=total1, disabled=True, key="purchased_total1")
     with w_col2:
         # Text inputs
+        st.write("추가 매수")
         purchased_price2 = st.text_input("Enter purchased price:", key="purchased_price2")
         purchased_number2 = st.text_input("Enter purchased number:", key="purchased_number2")
         # Calculate total
@@ -387,6 +389,7 @@ with tab3:
             final_price = float(final_total)/float(final_number)
     with w_col3:
         # Text inputs
+        st.write("평단 계산")
         purchased_price3 = st.text_input("Enter purchased price:", disabled=True, value=final_price, key="purchased_price3")
         purchased_number3 = st.text_input("Enter purchased number:", disabled=True, value=final_number, key="purchased_number3")
         purchased_total3 = st.text_input("Purchased Total:", disabled=True, value=final_total, key="purchased_total3")
