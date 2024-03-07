@@ -360,18 +360,17 @@ with tab2:
     update_stock_data()
 with tab3:
     st.header("An owl")
-    #water_col_1, water_col_2, water_col_3, water_col_4 = st.columns(4)
-    #with water_col_1:
-    #    st.
-    # Text inputs
-    purchased_price = st.text_input("Enter purchased price:", key="purchased_price1")
-    purchased_number = st.text_input("Enter purchased number:", key="purchased_number1")
-
-    # Calculate total
-    total = calculate_total(purchased_price, purchased_number)
-
-    # Display total
-    st.text_input("Purchased Total:", value=total, disabled=True)
+    w_col1, w_col2, w_col3, w_col4 = st.columns(4)
+    with w_col1:
+        # Text inputs
+        purchased_price1 = st.text_input("Enter purchased price:", key="purchased_price1")
+        purchased_number1 = st.text_input("Enter purchased number:", key="purchased_number1")
+    
+        # Calculate total
+        total1 = calculate_total(purchased_price1, purchased_number1)
+    
+        # Display total
+        purchased_total1 = st.text_input("Purchased Total:", value=total1, disabled=True)
 
 
   
