@@ -13,6 +13,16 @@ import urllib3
 import ast
 import re
 #======================def START=========================
+# 물타기용
+def calculate_total(price, number):
+    try:
+        price = float(price)
+        number = float(number)
+        total = price * number
+        return total
+    except ValueError:
+        return None
+        
 #===========Upbit START=============
 #코인 리스트 가져오기
 def get_tickers():
@@ -350,6 +360,18 @@ with tab2:
     update_stock_data()
 with tab3:
     st.header("An owl")
+    #water_col_1, water_col_2, water_col_3, water_col_4 = st.columns(4)
+    #with water_col_1:
+    #    st.
+    # Text inputs
+    purchased_price = st.text_input("Enter purchased price:", key="purchased_price1")
+    purchased_number = st.text_input("Enter purchased number:", key="purchased_number1")
+
+    # Calculate total
+    total = calculate_total(purchased_price, purchased_number)
+
+    # Display total
+    st.text_input("Purchased Total:", value=total, disabled=True)
 
 
   
