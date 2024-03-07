@@ -378,15 +378,15 @@ with tab3:
         # Display total
         purchased_total2 = st.text_input("Purchased Total:", value=total2, disabled=True, key="purchased_total2")
         # for w_col3
-        final_number = float(purchased_price1) + float(purchased_price2)
-        final_total = float(purchased_total1) + float(purchased_total2)
-        final_price = float(final_total)/float(final_number)
+        if purchased_price1 is not None and purchased_price2 is not None and purchased_total1 is not None and purchased_total2 is not None:
+            final_number = float(purchased_price1) + float(purchased_price2)
+            final_total = float(purchased_total1) + float(purchased_total2)
+            final_price = float(final_total)/float(final_number)
     with w_col3:
         # Text inputs
-        if total1 is not None and total2 is not None:
-            purchased_price3 = st.text_input("Enter purchased price:", disabled=True, value=final_pricem, key="purchased_price3")
-            purchased_number3 = st.text_input("Enter purchased number:", disabled=True, value=final_number, key="purchased_number3")
-            purchased_total3 = st.text_input("Purchased Total:", disabled=True, value=final_total, key="purchased_total3")
+        purchased_price3 = st.text_input("Enter purchased price:", disabled=True, value=final_pricem, key="purchased_price3")
+        purchased_number3 = st.text_input("Enter purchased number:", disabled=True, value=final_number, key="purchased_number3")
+        purchased_total3 = st.text_input("Purchased Total:", disabled=True, value=final_total, key="purchased_total3")
   
 
     
