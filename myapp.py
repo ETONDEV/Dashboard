@@ -22,6 +22,12 @@ def calculate_total(price, number):
         return total
     except ValueError:
         return None
+# Format number with commas and no decimal places
+def format_number(number):
+    if number is None:
+        return None
+    else:
+        return "{:,.0f}".format(number)        
         
 #===========Upbit START=============
 #코인 리스트 가져오기
@@ -372,7 +378,7 @@ with tab3:
         # Calculate total
         total1 = calculate_total(purchased_price1, purchased_number1)
         # Display total
-        purchased_total1 = st.text_input("매수금액", value=total1, disabled=True, key="purchased_total1")
+        purchased_total1 = st.text_input("매수금액", value=format_number(total1), disabled=True, key="purchased_total1")
     with w_col2:
         # Text inputs
         st.write("추가 매수")
@@ -381,7 +387,7 @@ with tab3:
         # Calculate total
         total2 = calculate_total(purchased_price2, purchased_number2)
         # Display total
-        purchased_total2 = st.text_input("매수금액", value=total2, disabled=True, key="purchased_total2")
+        purchased_total2 = st.text_input("매수금액", value=format_number(total2), disabled=True, key="purchased_total2")
         # for w_col3
         if purchased_price1 is not None and purchased_price2 is not None and purchased_total1 is not None and purchased_total2 is not None:
             final_number = float(purchased_number1) + float(purchased_number2)
@@ -390,9 +396,9 @@ with tab3:
     with w_col3:
         # Text inputs
         st.write("평단 계산")
-        purchased_price3 = st.text_input("매수평균가", disabled=True, value=final_price, key="purchased_price3")
-        purchased_number3 = st.text_input("보유수량", disabled=True, value=final_number, key="purchased_number3")
-        purchased_total3 = st.text_input("매수금액", disabled=True, value=final_total, key="purchased_total3")
+        purchased_price3 = st.text_input("매수평균가", disabled=True, value=format_number(final_price), key="purchased_price3")
+        purchased_number3 = st.text_input("보유수량", disabled=True, value=format_number(final_number), key="purchased_number3")
+        purchased_total3 = st.text_input("매수금액", disabled=True, value=format_number(final_total), key="purchased_total3")
   
 
     
