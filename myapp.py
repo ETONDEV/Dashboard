@@ -360,6 +360,9 @@ with tab2:
     update_stock_data()
 with tab3:
     st.header("An owl")
+    final_number = ""
+    final_total = ""
+    final_price = ""
     w_col1, w_col2, w_col3, w_col4 = st.columns(4)
     with w_col1:
         # Text inputs
