@@ -365,14 +365,29 @@ with tab3:
         # Text inputs
         purchased_price1 = st.text_input("Enter purchased price:", key="purchased_price1")
         purchased_number1 = st.text_input("Enter purchased number:", key="purchased_number1")
-    
         # Calculate total
         total1 = calculate_total(purchased_price1, purchased_number1)
-    
         # Display total
         purchased_total1 = st.text_input("Purchased Total:", value=total1, disabled=True)
+   with w_col2:
+        # Text inputs
+        purchased_price2 = st.text_input("Enter purchased price:", key="purchased_price2")
+        purchased_number2 = st.text_input("Enter purchased number:", key="purchased_number2")
+        # Calculate total
+        total2 = calculate_total(purchased_price2, purchased_number2)
+        # Display total
+        purchased_total2 = st.text_input("Purchased Total:", value=total2, disabled=True)
+        
+        
+        final_number = purchased_price1 + purchased_price2
+        final_total = purchased_total1 + purchased_total2
+        final_price = final_total/final_number
 
-
+   with w_col3:
+        # Text inputs
+        purchased_price3 = st.text_input("Enter purchased price:", disabled=True, value=final_price)
+        purchased_number3 = st.text_input("Enter purchased number:", disabled=True, value=final_number)
+        purchased_total3 = st.text_input("Purchased Total:", value=total3, disabled=True, value=final_total)
   
 
     
