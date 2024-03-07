@@ -395,7 +395,7 @@ with tab3:
         # for w_col3
         if purchased_price1 is not None and purchased_price2 is not None and purchased_total1 is not None and purchased_total2 is not None:
             final_number = float(purchased_number1) + float(purchased_number2)
-            final_total = float(purchased_total1) + float(purchased_total2)
+            final_total = float(total1) + float(total2)
             final_price = float(final_total)/float(final_number)
     with w_col3:
         # Text inputs
