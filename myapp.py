@@ -377,8 +377,7 @@ with tab3:
         total2 = calculate_total(purchased_price2, purchased_number2)
         # Display total
         purchased_total2 = st.text_input("Purchased Total:", value=total2, disabled=True)
-        
-    with w_col3:
+        # for w_col3
         final_number = purchased_price1 + purchased_price2
         final_total = purchased_total1 + purchased_total2
         final_price = final_total/final_number
