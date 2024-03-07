@@ -383,9 +383,10 @@ with tab3:
         final_price = float(final_total)/float(final_number)
     with w_col3:
         # Text inputs
-        purchased_price3 = st.text_input("Enter purchased price:", disabled=True, value=final_pricem, key="purchased_price3")
-        purchased_number3 = st.text_input("Enter purchased number:", disabled=True, value=final_number, key="purchased_number3")
-        purchased_total3 = st.text_input("Purchased Total:", disabled=True, value=final_total, key="purchased_total3")
+        if total1 is not None and total2 is not None:
+            purchased_price3 = st.text_input("Enter purchased price:", disabled=True, value=final_pricem, key="purchased_price3")
+            purchased_number3 = st.text_input("Enter purchased number:", disabled=True, value=final_number, key="purchased_number3")
+            purchased_total3 = st.text_input("Purchased Total:", disabled=True, value=final_total, key="purchased_total3")
   
 
     
