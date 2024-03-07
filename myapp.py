@@ -26,8 +26,12 @@ def calculate_total(price, number):
 def format_number(number):
     if number is None:
         return None
-    else:
-        return "{:,.0f}".format(number)        
+    elif isinstance(number, str):
+        try:
+            number = float(number)
+        except ValueError:
+            return None
+    return "{:,.0f}".format(number)
         
 #===========Upbit START=============
 #코인 리스트 가져오기
