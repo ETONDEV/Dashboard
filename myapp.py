@@ -351,7 +351,7 @@ all_coin_list = []
 all_coin_list = get_tickers()
 
 # 초기 코인선택 대상 설정
-text_values = ["KRW-BTC", "KRW-ETH", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-ETC", "KRW-SAND", "KRW-XEC", "KRW-DOGE", "KRW-SHIB"]
+text_values = ["KRW-BTC", "KRW-ETH", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-ETC", "KRW-SAND", "KRW-XEC", "KRW-DOGE", "KRW-SHIB", "KRW-BCH"]
 indices = [all_coin_list.index(text) for text in text_values if text in all_coin_list]
 
 tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
