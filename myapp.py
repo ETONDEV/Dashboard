@@ -64,50 +64,51 @@ def get_order_price(market):
 
 #코인 메인 표
 def update_coin_data():
-    #global coin_array, trade_price, coin_string, coin_number, coin_array_noKRW, signed_change_rate, signed_change_price, up_down, sum_ask_size, sum_bid_size
-    global coin_array, coin_string, coin_number, coin_array_noKRW
-    coin_data = get_ticker_price(coin_string) #선택된 코인 data 가져오기
-    coin_orderbook = get_order_price(coin_string)
-
-    trade_price = [] #현재가
-    up_down = [] #전일대비 업다운
-    signed_change_rate = [] #전일대비 퍼센트
-    signed_change_price = [] #전일대비 금액
-    sum_ask_size = []
-    sum_bid_size = []
-    sum_ask_bid_rate = []
-    compare = []
-
-    #코인 data 가공
-    #현재가
-    trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)]
-    #전일대비 퍼센트
-    signed_change_rate = ["{0:6.2f}%".format(float(coin_data[i]['signed_change_rate']*100)) for i in range(coin_number)]
-    #전일대비 금액
-    signed_change_price = [coin_data[i]['signed_change_price'] for i in range(coin_number)]
-    #전일대비 업다운
-    change_symbols = {"FALL": "▽", "EVEN": "〓", "RISE": "▲"}
-    up_down = [change_symbols.get(coin_data[m]['change'], "") for m in range(coin_number)]
-    #매수/매도값 산
-    for j in range(coin_number):
-        units = coin_orderbook[j]['orderbook_units']
-        sum_ask_size.append(int(sum(u['ask_size'] * u['ask_price'] for u in units[:15])))
-        sum_bid_size.append(int(sum(u['bid_size'] * u['bid_price'] for u in units[:15])))
-    #매수/매도값 산
-    for m in range(0,coin_number):
-        if sum_ask_size[m] > sum_bid_size[m]:
-            sum_ask_bid_tmp = "{0:6.1f}".format(float(sum_ask_size[m]/sum_bid_size[m]))
-            compare_tmp = "▶"
-        else:
-            sum_ask_bid_tmp = "{0:6.1f}".format(float(-sum_bid_size[m]/sum_ask_size[m]))
-            compare_tmp = "◁"
-        sum_ask_bid_rate.append(sum_ask_bid_tmp)
-        compare.append(compare_tmp)
+    if st.session_state is not None:
+        #global coin_array, trade_price, coin_string, coin_number, coin_array_noKRW, signed_change_rate, signed_change_price, up_down, sum_ask_size, sum_bid_size
+        global coin_array, coin_string, coin_number, coin_array_noKRW
+        coin_data = get_ticker_price(coin_string) #선택된 코인 data 가져오기
+        coin_orderbook = get_order_price(coin_string)
     
-    #Dataframe 뿌려주기(초기값)
-    coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price, 'Trd': up_down, '%': signed_change_rate, 'Change': signed_change_price, 'A/B': sum_ask_bid_rate, 'Ask': sum_ask_size, 'Cmpr': compare, 'Bid': sum_bid_size})
-    coin_df_sorted = coin_df.sort_values(by=['Price'], ascending=False)
-    coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True)
+        trade_price = [] #현재가
+        up_down = [] #전일대비 업다운
+        signed_change_rate = [] #전일대비 퍼센트
+        signed_change_price = [] #전일대비 금액
+        sum_ask_size = []
+        sum_bid_size = []
+        sum_ask_bid_rate = []
+        compare = []
+    
+        #코인 data 가공
+        #현재가
+        trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)]
+        #전일대비 퍼센트
+        signed_change_rate = ["{0:6.2f}%".format(float(coin_data[i]['signed_change_rate']*100)) for i in range(coin_number)]
+        #전일대비 금액
+        signed_change_price = [coin_data[i]['signed_change_price'] for i in range(coin_number)]
+        #전일대비 업다운
+        change_symbols = {"FALL": "▽", "EVEN": "〓", "RISE": "▲"}
+        up_down = [change_symbols.get(coin_data[m]['change'], "") for m in range(coin_number)]
+        #매수/매도값 산
+        for j in range(coin_number):
+            units = coin_orderbook[j]['orderbook_units']
+            sum_ask_size.append(int(sum(u['ask_size'] * u['ask_price'] for u in units[:15])))
+            sum_bid_size.append(int(sum(u['bid_size'] * u['bid_price'] for u in units[:15])))
+        #매수/매도값 산
+        for m in range(0,coin_number):
+            if sum_ask_size[m] > sum_bid_size[m]:
+                sum_ask_bid_tmp = "{0:6.1f}".format(float(sum_ask_size[m]/sum_bid_size[m]))
+                compare_tmp = "▶"
+            else:
+                sum_ask_bid_tmp = "{0:6.1f}".format(float(-sum_bid_size[m]/sum_ask_size[m]))
+                compare_tmp = "◁"
+            sum_ask_bid_rate.append(sum_ask_bid_tmp)
+            compare.append(compare_tmp)
+        
+        #Dataframe 뿌려주기(초기값)
+        coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price, 'Trd': up_down, '%': signed_change_rate, 'Change': signed_change_price, 'A/B': sum_ask_bid_rate, 'Ask': sum_ask_size, 'Cmpr': compare, 'Bid': sum_bid_size})
+        coin_df_sorted = coin_df.sort_values(by=['Price'], ascending=False)
+        coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True)
     
 #===========Upbit END=============
 
