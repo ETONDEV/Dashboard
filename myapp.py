@@ -423,13 +423,6 @@ def update_clock():
     stock2_container.markdown(market_status(current_time_utc, us_tz, us_market_open, us_market_close, us_time_zone))
     stock1_container.markdown(market_status(current_time_utc, korean_tz, korean_market_open, korean_market_close, korea_time_zone))
 
-# 페이지 타이틀을 변경하는 자바스크립트 함수 정의
-def update_title():
-  # Update logic for the title (e.g., based on time)
-  current_time = st.sidebar.text_input("Current Time", "")
-  if current_time:
-    current_title = f"Current Time: {current_time}"
-
 
 counter = 0
 # Call the update_clock function every second
@@ -445,7 +438,4 @@ while True:
             update_stock_data()
         counter = 0
     time.sleep(1)
-    # 예시로 간단한 타이틀 변경 로직을 추가합니다.
-    new_title = f"새로운 타이틀 - {counter}"
-    update_title()
     counter += 1
