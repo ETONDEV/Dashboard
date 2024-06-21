@@ -5,6 +5,7 @@ import pytz  # Import pytz for time zone support
 import streamlit_antd_components as sac
 import requests
 import pandas as pd
+from streamlit.components.v1 import html
 
 #주식관련
 #import requests
