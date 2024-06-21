@@ -437,4 +437,5 @@ while True:
             update_stock_data()
         counter = 0
     time.sleep(1)
+    st.set_page_config(page_title=stock_data[1]['Price'])
     counter += 1
