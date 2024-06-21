@@ -405,7 +405,14 @@ with tab3:
         purchased_number3 = st.text_input("보유수량", disabled=True, value=format_number(final_number), key="purchased_number3")
         purchased_total3 = st.text_input("매수금액", disabled=True, value=format_number(final_total), key="purchased_total3")
   
-
+# 페이지 타이틀을 변경하는 자바스크립트 함수 정의
+def update_title(new_title):
+    js_code = f"""
+    <script>
+    document.title = '{new_title}';
+    </script>
+    """
+    html(js_code)
     
 def update_clock():
     # Get the current time in UTC
@@ -437,5 +444,7 @@ while True:
             update_stock_data()
         counter = 0
     time.sleep(1)
-    st.set_page_config(page_title=stock_data[1]['Price'])
+    # 예시로 간단한 타이틀 변경 로직을 추가합니다.
+    new_title = f"새로운 타이틀 - {counter}"
+    update_title(new_title)
     counter += 1
