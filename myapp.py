@@ -407,13 +407,14 @@ with tab3:
         purchased_total3 = st.text_input("매수금액", disabled=True, value=format_number(final_total), key="purchased_total3")
   
 # 페이지 타이틀을 변경하는 자바스크립트 함수 정의
+# 페이지 타이틀을 변경하는 자바스크립트 함수 정의
 def update_title(new_title):
     js_code = f"""
     <script>
     document.title = '{new_title}';
     </script>
     """
-    html(js_code)
+    html(js_code, height=0, width=0)
     
 def update_clock():
     # Get the current time in UTC
