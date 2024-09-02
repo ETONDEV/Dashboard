@@ -151,7 +151,7 @@ def update_stock_data():
     stock_data = []
     
     #global stock_array
-    stock_input = "005930, 305720, 305540, 174360, 448330, 003620, 133690" #★★★★★★★★★★★★★종목입력★★★★★★★★★★★★★
+    stock_input = "005930, 305720, 305540, 174360, 448330, 003620, 133690, 000660" #★★★★★★★★★★★★★종목입력★★★★★★★★★★★★★
     stock_input_tmp = stock_input.replace(" ", "")
     stock_array = stock_input_tmp.split(",") #string to Array
     stock_number = len(stock_array)    
