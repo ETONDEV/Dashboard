@@ -109,7 +109,7 @@ def update_coin_data():
         #Dataframe 뿌려주기(초기값)
         coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price, 'Trd': up_down, '%': signed_change_rate, 'Change': signed_change_price, 'A/B': sum_ask_bid_rate, 'Ask': sum_ask_size, 'Cmpr': compare, 'Bid': sum_bid_size})
         coin_df_sorted = coin_df.sort_values(by=['Price'], ascending=False)
-        coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True, height=630)
+        coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True, height=660)
     
 #===========Upbit END=============
 
@@ -328,7 +328,7 @@ close_open = ['Closed', 'Opened']
 
 
 #col1, col2, col3, col4 = st.columns([4, 1, 2.5, 2.5])
-col1, col2, col3, col4 = st.columns([0, 0, 2.5, 2.5])
+col1, col2, col3, col4 = st.columns([0.1, 0.1, 0.9, 0.9])
 with col1:
     selected_time_zone = st.selectbox("Select Time Zone :", time_zones)
     clock_container = st.empty()
@@ -353,7 +353,7 @@ all_coin_list = []
 all_coin_list = get_tickers()
 
 # 초기 코인선택 대상 설정
-text_values = ["KRW-BTC", "KRW-ETH", "KRW-ETC", "KRW-SAND", "KRW-QTUM", "KRW-EOS", "KRW-NEO", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-CHZ", "KRW-XEC", "KRW-DOGE", "KRW-BEAM", "KRW-BCH", "KRW-XEM", "KRW-SHIB"]
+text_values = ["KRW-BTC", "KRW-ETH", "KRW-ETC", "KRW-SAND", "KRW-JST", "KRW-QTUM", "KRW-EOS", "KRW-NEO", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-CHZ", "KRW-XEC", "KRW-DOGE", "KRW-BEAM", "KRW-BCH", "KRW-XEM", "KRW-SHIB"]
 indices = [all_coin_list.index(text) for text in text_values if text in all_coin_list]
 
 tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
