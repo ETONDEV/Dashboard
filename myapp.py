@@ -443,25 +443,34 @@ def update_clock():
     stock1_container.markdown(market_status(current_time_utc, korean_tz, korean_market_open, korean_market_close, korea_time_zone))
 
 
+# 초기 상태 설정
+if 'initialized' not in st.session_state:
+    st.session_state.initialized = True
+    st.session_state.coin_array = []
+    st.session_state.coin_string = ""
+    st.session_state.coin_data = []
+    st.session_state.kor_market_open_flag = 0
+
+# 메인 루프
 counter = 0
-# Call the update_clock function every second
 while True:
     try:
-        while True:
-            if not st.session_state.initialized:
-                time.sleep(1)
-                continue      
+        if not st.session_state.initialized:
+            time.sleep(1)
+            continue
+            
         update_clock()
         update_coin_data()
-        #장오픈중일때만 if 추가
+        
         if counter % 10 == 0:
-            stock_test.markdown(f"환율 업데이트 중({kor_market_open_flag})")
+            stock_test.markdown(f"환율 업데이트 중({st.session_state.kor_market_open_flag})")
             exchange_rate()
-            if kor_market_open_flag == 1:
-                stock_test.markdown(f"주식 업데이트 중({kor_market_open_flag})")
+            if st.session_state.kor_market_open_flag == 1:
+                stock_test.markdown(f"주식 업데이트 중({st.session_state.kor_market_open_flag})")
                 update_stock_data()
             counter = 0
         time.sleep(1)
         counter += 1
     except Exception as e:
         st.error(f"Error in main loop: {str(e)}")
+        time.sleep(1)
