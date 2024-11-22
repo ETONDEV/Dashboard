@@ -66,7 +66,8 @@ def get_order_price(market):
 #코인 메인 표
 def update_coin_data():
     try:
-        if not st.session_state.initialized:
+        if 'initialized' not in st.session_state:
+            st.session_state.initialized = True
             return
                 
         if st.session_state is not None:
@@ -114,8 +115,8 @@ def update_coin_data():
             coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price, 'Trd': up_down, '%': signed_change_rate, 'Change': signed_change_price, 'A/B': sum_ask_bid_rate, 'Ask': sum_ask_size, 'Cmpr': compare, 'Bid': sum_bid_size})
             coin_df_sorted = coin_df.sort_values(by=['Price'], ascending=False)
             coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True, height=660)
-     except Exception as e:
-        st.error(f"Error updating coin data: {str(e)}")       
+    except Exception as e:
+        st.error(f"Error updating coin data: {str(e)}") 
 #===========Upbit END=============
 
 
