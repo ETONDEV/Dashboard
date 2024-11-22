@@ -114,19 +114,7 @@ def update_coin_data():
             #Dataframe 뿌려주기(초기값)
             coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price, 'Trd': up_down, '%': signed_change_rate, 'Change': signed_change_price, 'A/B': sum_ask_bid_rate, 'Ask': sum_ask_size, 'Cmpr': compare, 'Bid': sum_bid_size})
             coin_df_sorted = coin_df.sort_values(by=['Price'], ascending=False)
-
-            # 스타일링 함수 정의
-            def highlight_rows(row):
-                if row['Trd'] == '▲':
-                    return ['background-color: rgba(255, 0, 0, 0.2)'] * len(row)
-                elif row['Trd'] == '▽':
-                    return ['background-color: rgba(0, 0, 255, 0.2)'] * len(row)
-                return [''] * len(row)
-            styled_df = coin_df_sorted.style.apply(highlight_rows, axis=1)
-          # 스타일이 적용된 DataFrame 표시
-            coin_dataframe.dataframe(styled_df, hide_index=True, use_container_width=True, height=660)
-              
-            # coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True, height=660)
+            coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True, height=660)
     except Exception as e:
         st.error(f"Error updating coin data: {str(e)}") 
 #===========Upbit END=============
