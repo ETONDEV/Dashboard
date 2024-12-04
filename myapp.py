@@ -14,8 +14,11 @@ import urllib3
 import ast
 import re
 
+####### 종목 입력 #######
+# 코인
 text_values = ["KRW-BTC", "KRW-ETH", "KRW-ETC", "KRW-SAND", "KRW-JST", "KRW-QTUM", "KRW-EOS", "KRW-NEO", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-XEC", "KRW-DOGE", "KRW-BEAM", "KRW-BCH", "KRW-XEM", "KRW-SHIB", "KRW-SNT", "KRW-ENS"]
-
+# 주식          삼성    2차전지 나스닥   하이닉스  
+stock_input = "005930, 305720, 133690, 000660" #★★★★★★★★★★★★★종목입력★★★★★★★★★★★★★
 #======================def START=========================
 # 물타기용
 def calculate_total(price, number):
@@ -160,7 +163,7 @@ def update_stock_data():
     stock_data = []
     
     #global stock_array
-    stock_input = "005930, 305720, 305540, 174360, 448330, 003620, 133690, 000660" #★★★★★★★★★★★★★종목입력★★★★★★★★★★★★★
+    # stock_input = "005930, 305720, 305540, 174360, 448330, 003620, 133690, 000660" #★★★★★★★★★★★★★종목입력★★★★★★★★★★★★★
     stock_input_tmp = stock_input.replace(" ", "")
     stock_array = stock_input_tmp.split(",") #string to Array
     stock_number = len(stock_array)    
