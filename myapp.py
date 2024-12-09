@@ -140,11 +140,41 @@ def update_coin_data():
                 sum_ask_bid_rate.append(sum_ask_bid_tmp)
                 compare.append(compare_tmp)
             
-            #Dataframe 뿌려주기(초기값)
-            coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price, 'Trd': up_down, '%': signed_change_rate, 'Change': signed_change_price, 'A/B': sum_ask_bid_rate, 'Ask': sum_ask_size, 'Cmpr': compare, 'Bid': sum_bid_size})
-            coin_df_sorted = coin_df.sort_values(by=['Price'], ascending=False)
-            coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True, height=700)
+            # #Dataframe 뿌려주기(초기값)
+            # coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price, 'Trd': up_down, '%': signed_change_rate, 'Change': signed_change_price, 'A/B': sum_ask_bid_rate, 'Ask': sum_ask_size, 'Cmpr': compare, 'Bid': sum_bid_size})
+            # coin_df_sorted = coin_df.sort_values(by=['Price'], ascending=False)
+            # coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True, height=700)
 
+
+            # 메인 코인 DataFrame
+            coin_df = pd.DataFrame({
+                'Name': coin_array_noKRW,
+                'Price': [format_number(price) for price in trade_price],
+                'Trd': up_down,
+                '%': signed_change_rate,
+                'Change': signed_change_price,
+                'A/B': sum_ask_bid_rate,
+                'Ask': sum_ask_size,
+                'Cmpr': compare,
+                'Bid': sum_bid_size
+            })
+            
+            # 포트폴리오에 있는 코인 찾기
+            portfolio_coins = [coin.replace('KRW-', '') for coin in portfolio_data.keys()]
+            
+            # 스타일링을 위한 함수 정의
+            def highlight_portfolio_coins(row):
+                if row['Name'] in portfolio_coins:
+                    return ['background-color: #e6f3ff'] * len(row)
+                return [''] * len(row)
+            
+            # DataFrame 정렬 및 스타일링 적용
+            coin_df_sorted = coin_df.sort_values(by=['Price'], ascending=False)
+            styled_df = coin_df_sorted.style.apply(highlight_portfolio_coins, axis=1)
+            
+            # 스타일이 적용된 DataFrame 표시
+            coin_dataframe.dataframe(styled_df, hide_index=True, use_container_width=True, height=700)
+            
             # 포트폴리오 DataFrame 생성
             portfolio_rows = []
             for coin_symbol, details in portfolio_data.items():
