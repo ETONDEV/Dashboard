@@ -116,8 +116,8 @@ def update_coin_data():
         
             #코인 data 가공
             #현재가
-            trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)]
-            # trade_price = format_number([coin_data[i]['trade_price'] for i in range(coin_number)])
+            # trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)]
+            trade_price = [format_number(coin_data[i]['trade_price']) for i in range(coin_number)]
             
             #전일대비 퍼센트
             signed_change_rate = ["{0:6.2f}%".format(float(coin_data[i]['signed_change_rate']*100)) for i in range(coin_number)]
