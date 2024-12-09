@@ -24,7 +24,7 @@ portfolio_data = {
 
 ####### 종목 입력 #######
 # 코인
-text_values = ["KRW-BTC", "KRW-ETH", "KRW-ETC", "KRW-SAND", "KRW-JST", "KRW-QTUM", "KRW-EOS", "KRW-NEO", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-XEC", "KRW-DOGE", "KRW-BEAM", "KRW-BCH", "KRW-XEM", "KRW-SHIB", "KRW-SNT", "KRW-ENS"]
+text_values = ["KRW-BTC", "KRW-ETH", "KRW-ETC", "KRW-SAND", "KRW-JST", "KRW-QTUM", "KRW-EOS", "KRW-NEO", "KRW-TRON", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-XEC", "KRW-DOGE", "KRW-BEAM", "KRW-BCH", "KRW-XEM", "KRW-SHIB", "KRW-SNT", "KRW-ENS"]
 # 주식          삼성    2차전지 나스닥   하이닉스  
 stock_input = "005930, 305720, 133690, 000660" #★★★★★★★★★★★★★종목입력★★★★★★★★★★★★★
 #======================def START=========================
@@ -143,7 +143,7 @@ def update_coin_data():
             #Dataframe 뿌려주기(초기값)
             coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price, 'Trd': up_down, '%': signed_change_rate, 'Change': signed_change_price, 'A/B': sum_ask_bid_rate, 'Ask': sum_ask_size, 'Cmpr': compare, 'Bid': sum_bid_size})
             coin_df_sorted = coin_df.sort_values(by=['Price'], ascending=False)
-            coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True, height=700)
+            coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True, height=750)
 
             
             # 포트폴리오 DataFrame 생성
