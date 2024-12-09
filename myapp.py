@@ -162,9 +162,9 @@ def update_coin_data():
                     # 수익/손실 텍스트 색상 설정
                     profit_loss_text = f"{format_number(profit_loss)}"
                     if profit_loss > 0:
-                        profit_loss_text = f"▲{profit_loss_text}"
+                        profit_loss_text = f"▲ {profit_loss_text}"
                     elif profit_loss < 0:
-                        profit_loss_text = f"▽{profit_loss_text}"
+                        profit_loss_text = f"▽ {profit_loss_text}"
                     
                     portfolio_rows.append({
                         'Coin': coin_symbol.replace('KRW-', ''),
