@@ -38,7 +38,16 @@ def calculate_total(price, number):
     except ValueError:
         return None
 # Format number with commas and no decimal places
-def format_number(number):
+# def format_number(number):
+#     if number is None:
+#         return None
+#     elif isinstance(number, str):
+#         try:
+#             number = float(number)
+#         except ValueError:
+#             return None
+#     return "{:,.0f}".format(number)
+def format_number(number, decimal_places=2):
     if number is None:
         return None
     elif isinstance(number, str):
@@ -46,8 +55,14 @@ def format_number(number):
             number = float(number)
         except ValueError:
             return None
-    return "{:,.0f}".format(number)
+            
+    # Format numbers greater than 1000 without decimal places
+    if abs(number) >= 1000:
+        return "{:,.0f}".format(number)
+    else:
+        return "{:,.{}f}".format(number, decimal_places)
         
+
 #===========Upbit START=============
 #코인 리스트 가져오기
 def get_tickers():
