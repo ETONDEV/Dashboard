@@ -16,9 +16,9 @@ import re
 
 # 포트폴리오 데이터 (초기값 설정)
 portfolio_data = {
-    'KRW-BTC': {'amount': 0.1, 'avg_price': 65000000},
-    'KRW-ETH': {'amount': 1.5, 'avg_price': 3500000},
-    'KRW-XRP': {'amount': 1000, 'avg_price': 800},
+    'KRW-JST': {'amount': 458881.69551587, 'avg_price': 70.4},
+    # 'KRW-ETH': {'amount': 1.5, 'avg_price': 3500000},
+    # 'KRW-XRP': {'amount': 1000, 'avg_price': 800},
 }
 
 
@@ -413,7 +413,7 @@ tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
 with tab1:
     ex_rate_dataframe = st.empty()
     coin_dataframe = st.empty()
-    st.markdown("### My Portfolio")  # 포트폴리오 섹션 제목
+    # st.markdown("### My Portfolio")  # 포트폴리오 섹션 제목
     portfolio_dataframe = st.empty()  # 포트폴리오 DataFrame을 위한 공간    
     stock_dataframe = st.empty()
     stock_test = st.empty()
