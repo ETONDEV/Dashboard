@@ -116,7 +116,9 @@ def update_coin_data():
         
             #코인 data 가공
             #현재가
-            trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)]
+            # trade_price = [coin_data[i]['trade_price'] for i in range(coin_number)]
+            trade_price = format_number([coin_data[i]['trade_price'] for i in range(coin_number)])
+            
             #전일대비 퍼센트
             signed_change_rate = ["{0:6.2f}%".format(float(coin_data[i]['signed_change_rate']*100)) for i in range(coin_number)]
             #전일대비 금액
@@ -143,7 +145,7 @@ def update_coin_data():
             #Dataframe 뿌려주기(초기값)
             coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price, 'Trd': up_down, '%': signed_change_rate, 'Change': signed_change_price, 'A/B': sum_ask_bid_rate, 'Ask': sum_ask_size, 'Cmpr': compare, 'Bid': sum_bid_size})
             coin_df_sorted = coin_df.sort_values(by=['Price'], ascending=False)
-            coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True, height=730)
+            coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True, height=740)
 
             
             # 포트폴리오 DataFrame 생성
