@@ -146,8 +146,7 @@ def update_coin_data():
             # coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True, height=700)
 
 
-            # 메인 코인 DataFrame
-            # 기존 DataFrame 생성 코드는 그대로 유지하고 스타일만 추가
+            # 메인 코인 DataFrame            # DataFrame 생성
             coin_df = pd.DataFrame({
                 'Name': coin_array_noKRW,
                 'Price': [format_number(price) for price in trade_price],
@@ -163,18 +162,17 @@ def update_coin_data():
             # 포트폴리오 코인 목록 생성
             portfolio_coins = [coin.replace('KRW-', '') for coin in portfolio_data.keys()]
             
-            # DataFrame 정렬
-            coin_df_sorted = coin_df.sort_values(by=['Price'], ascending=False)
-            
             # 스타일 적용
             def highlight_portfolio_coins(val):
                 return 'background-color: #e6f3ff' if val in portfolio_coins else ''
             
-            # Name 열에만 스타일 적용
-            styled_df = coin_df_sorted.style.applymap(highlight_portfolio_coins, subset=['Name'])
+            # 스타일 적용 후 정렬
+            styled_df = coin_df.style.applymap(highlight_portfolio_coins, subset=['Name'])
+            styled_df.data = styled_df.data.sort_values(by=['Price'], ascending=False)
             
-            # styled DataFrame 표시
+            # 스타일이 적용된 정렬된 DataFrame 표시
             coin_dataframe.dataframe(styled_df, hide_index=True, use_container_width=True, height=700)
+            
             
             # 포트폴리오 DataFrame 생성
             portfolio_rows = []
