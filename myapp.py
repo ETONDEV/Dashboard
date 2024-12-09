@@ -14,6 +14,14 @@ import urllib3
 import ast
 import re
 
+# 포트폴리오 데이터 (초기값 설정)
+portfolio_data = {
+    'KRW-BTC': {'amount': 0.1, 'avg_price': 65000000},
+    'KRW-ETH': {'amount': 1.5, 'avg_price': 3500000},
+    'KRW-XRP': {'amount': 1000, 'avg_price': 800},
+}
+
+
 ####### 종목 입력 #######
 # 코인
 text_values = ["KRW-BTC", "KRW-ETH", "KRW-ETC", "KRW-SAND", "KRW-JST", "KRW-QTUM", "KRW-EOS", "KRW-NEO", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-XEC", "KRW-DOGE", "KRW-BEAM", "KRW-BCH", "KRW-XEM", "KRW-SHIB", "KRW-SNT", "KRW-ENS"]
@@ -121,6 +129,32 @@ def update_coin_data():
             coin_df = pd.DataFrame({'Name': coin_array_noKRW, 'Price': trade_price, 'Trd': up_down, '%': signed_change_rate, 'Change': signed_change_price, 'A/B': sum_ask_bid_rate, 'Ask': sum_ask_size, 'Cmpr': compare, 'Bid': sum_bid_size})
             coin_df_sorted = coin_df.sort_values(by=['Price'], ascending=False)
             coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True, height=700)
+
+                # 포트폴리오 DataFrame 생성
+            portfolio_rows = []
+            for coin_symbol, details in portfolio_data.items():
+                if coin_symbol in coin_array:
+                    idx = coin_array.index(coin_symbol)
+                    current_price = trade_price[idx]
+                    amount = details['amount']
+                    avg_price = details['avg_price']
+                    
+                    total_value = current_price * amount
+                    profit_loss_pct = ((current_price - avg_price) / avg_price) * 100
+                    
+                    portfolio_rows.append({
+                        'Coin': coin_symbol.replace('KRW-', ''),
+                        'Amount': amount,
+                        'Avg Price': format_number(avg_price),
+                        'Current Price': format_number(current_price),
+                        'Total Value': format_number(total_value),
+                        'PnL %': f"{profit_loss_pct:.2f}%"
+                    })
+            
+            portfolio_df = pd.DataFrame(portfolio_rows)
+            portfolio_dataframe.dataframe(portfolio_df, hide_index=True, use_container_width=True)
+
+    
     except Exception as e:
         st.error(f"Error updating coin data: {str(e)}") 
 #===========Upbit END=============
@@ -379,6 +413,8 @@ tab1, tab2, tab3 = st.tabs(["Main", "Setting1", "Setting2"])
 with tab1:
     ex_rate_dataframe = st.empty()
     coin_dataframe = st.empty()
+    st.markdown("### My Portfolio")  # 포트폴리오 섹션 제목
+    portfolio_dataframe = st.empty()  # 포트폴리오 DataFrame을 위한 공간    
     stock_dataframe = st.empty()
     stock_test = st.empty()
     stock_test2 = st.empty()
