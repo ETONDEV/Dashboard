@@ -145,7 +145,7 @@ def update_coin_data():
             coin_df_sorted = coin_df.sort_values(by=['Price'], ascending=False)
             coin_dataframe.dataframe(coin_df_sorted, hide_index=True, use_container_width=True, height=700)
 
-                # 포트폴리오 DataFrame 생성
+            # 포트폴리오 DataFrame 생성
             portfolio_rows = []
             for coin_symbol, details in portfolio_data.items():
                 if coin_symbol in coin_array:
@@ -155,14 +155,24 @@ def update_coin_data():
                     avg_price = details['avg_price']
                     
                     total_value = current_price * amount
+                    initial_value = avg_price * amount
+                    profit_loss = total_value - initial_value
                     profit_loss_pct = ((current_price - avg_price) / avg_price) * 100
+                    
+                    # 수익/손실 텍스트 색상 설정
+                    profit_loss_text = f"{format_number(profit_loss)}"
+                    if profit_loss > 0:
+                        profit_loss_text = f"▲{profit_loss_text}"
+                    elif profit_loss < 0:
+                        profit_loss_text = f"▽{profit_loss_text}"
                     
                     portfolio_rows.append({
                         'Coin': coin_symbol.replace('KRW-', ''),
-                        'Amount': amount,
+                        'Amount': format_number(amount),
                         'Avg Price': format_number(avg_price),
                         'Current Price': format_number(current_price),
                         'Total Value': format_number(total_value),
+                        'PnL': profit_loss_text,  # 새로 추가된 열
                         'PnL %': f"{profit_loss_pct:.2f}%"
                     })
             
