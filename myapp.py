@@ -15,8 +15,13 @@ import ast
 import re
 
 # 포트폴리오 데이터 (초기값 설정)
+# portfolio_data = {
+#     'KRW-JST': {'amount': 458881.69551587, 'avg_price': 70.4},
+#     # 'KRW-ETH': {'amount': 1.5, 'avg_price': 3500000},
+#     # 'KRW-XRP': {'amount': 1000, 'avg_price': 800},
+# }
 portfolio_data = {
-    'KRW-JST': {'amount': 458881.69551587, 'avg_price': 70.4},
+    'KRW-ELF': {'amount': 36492.12005756, 'avg_price': 757.2},
     # 'KRW-ETH': {'amount': 1.5, 'avg_price': 3500000},
     # 'KRW-XRP': {'amount': 1000, 'avg_price': 800},
 }
@@ -24,7 +29,7 @@ portfolio_data = {
 
 ####### 종목 입력 #######
 # 코인
-text_values = ["KRW-BTC", "KRW-ETH", "KRW-ETC", "KRW-SAND", "KRW-JST", "KRW-QTUM", "KRW-EOS", "KRW-NEO", "KRW-TRX", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-XEC", "KRW-DOGE", "KRW-BEAM", "KRW-BCH", "KRW-XEM", "KRW-SHIB", "KRW-SNT", "KRW-ENS"]
+text_values = ["KRW-BTC", "KRW-ETH", "KRW-ETC", "KRW-SAND", "KRW-JST", "KRW-QTUM", "KRW-EOS", "KRW-NEO", "KRW-TRX", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-XEC", "KRW-DOGE", "KRW-BEAM", "KRW-BCH", "KRW-XEM", "KRW-SHIB", "KRW-SNT", "KRW-ELF"]
 # 주식          삼성    2차전지 나스닥   하이닉스  
 stock_input = "005930, 305720, 133690, 000660" #★★★★★★★★★★★★★종목입력★★★★★★★★★★★★★
 #======================def START=========================
