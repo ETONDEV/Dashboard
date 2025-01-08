@@ -61,11 +61,14 @@ def format_number(number, decimal_places=2):
         except ValueError:
             return None
             
-    # Format numbers greater than 1000 without decimal places
+    # Format numbers based on their value
     if abs(number) >= 1000:
-        return "{:,.0f}".format(number)
+        return "{:,.0f}".format(number)  # Numbers >= 1000 without decimal places
+    elif abs(number) < 1:
+        return "{:,.4f}".format(number)  # Numbers < 1 with 4 decimal places
     else:
-        return "{:,.{}f}".format(number, decimal_places)
+        return "{:,.{}f}".format(number, decimal_places)  # Other numbers with specified decimal places
+
         
 
 #===========Upbit START=============
