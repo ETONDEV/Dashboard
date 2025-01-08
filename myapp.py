@@ -65,7 +65,7 @@ def format_number(number, decimal_places=2):
     if abs(number) >= 1000:
         return "{:,.0f}".format(number)  # Numbers >= 1000 without decimal places
     elif abs(number) < 1:
-        return "{:,.4f}".format(number)  # Numbers < 1 with 4 decimal places
+        return "{:,.6f}".format(number)  # Numbers < 1 with 4 decimal places
     else:
         return "{:,.{}f}".format(number, decimal_places)  # Other numbers with specified decimal places
 
