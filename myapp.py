@@ -21,7 +21,7 @@ import re
 #     # 'KRW-XRP': {'amount': 1000, 'avg_price': 800},
 # }
 portfolio_data = {
-    'KRW-ELF': {'amount': 36492.12005756, 'avg_price': 757.2},
+    'KRW-BTT': {'amount': 14253714861.64674476, 'avg_price': 0.001908},
     # 'KRW-ETH': {'amount': 1.5, 'avg_price': 3500000},
     # 'KRW-XRP': {'amount': 1000, 'avg_price': 800},
 }
