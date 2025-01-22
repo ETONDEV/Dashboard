@@ -29,7 +29,7 @@ portfolio_data = {
 
 ####### 종목 입력 #######
 # 코인
-text_values = ["KRW-BTC", "KRW-ETH", "KRW-ETC", "KRW-SAND", "KRW-JST", "KRW-QTUM", "KRW-EOS", "KRW-NEO", "KRW-TRX", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-XEC", "KRW-DOGE", "KRW-BEAM", "KRW-BCH", "KRW-XEM", "KRW-BTT", "KRW-SNT", "KRW-ELF"]
+text_values = ["KRW-BTC", "KRW-ETH", "KRW-ETC", "KRW-SAND", "KRW-JST", "KRW-QTUM", "KRW-EOS", "KRW-NEO", "KRW-TRX", "KRW-XRP", "KRW-VET","KRW-STEEM", "KRW-XEC", "KRW-DOGE", "KRW-BEAM", "KRW-BCH", "KRW-XEM", "KRW-BTT", "KRW-SNT", "KRW-VTHO"]
 # 주식          삼성    2차전지 나스닥   하이닉스  
 stock_input = "005930, 305720, 133690, 000660" #★★★★★★★★★★★★★종목입력★★★★★★★★★★★★★
 #======================def START=========================
